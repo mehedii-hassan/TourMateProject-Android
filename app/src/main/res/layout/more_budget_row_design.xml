@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="moreBudgetModel"
+            type="com.example.tourmatenewproject.entities.TourMoreBudgetModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/tvMoreBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="Amount"
+                android:textColor="#ff69b4"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvBorrowedFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="Taking from"
+                android:textSize="12sp"
+                android:textColor="@color/hot_pink"
+                android:textStyle="italic|bold"
+                app:layout_constraintStart_toStartOf="@+id/tvMoreBudget"
+                app:layout_constraintTop_toBottomOf="@+id/tvMoreBudget" />
+
+            <TextView
+                android:id="@+id/tvTaka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="2dp"
+                android:text="TK"
+                android:textColor="#ff69b4"
+                android:textSize="18sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvMoreBudget" />
+
+            <TextView
+                android:id="@+id/tvAmountMB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="10"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@{String.valueOf(moreBudgetModel.more_budget_amount)}"
+                android:textColor="#ff69b4"
+                android:textSize="18sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTaka"
+                app:layout_constraintTop_toTopOf="@+id/tvMoreBudget" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingEnd="2dp"
+                android:paddingBottom="2dp"
+                android:text="@{moreBudgetModel.taking_from_where}"
+                android:textColor="#ff69b4"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAmountMB"
+                app:layout_constraintTop_toBottomOf="@+id/tvAmountMB" />
+
+            <TextView
+                android:id="@+id/tvCurrentDateAndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="12/09/2022"
+                android:paddingStart="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@{moreBudgetModel.date}"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/fabRowMenuMB"
+                app:layout_constraintStart_toStartOf="@+id/tvMoreBudget"
+                app:layout_constraintTop_toBottomOf="@+id/tvBorrowedFrom" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRowMenuMB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ffffff"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                app:borderWidth="0dp"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:tint="#FFCE30" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

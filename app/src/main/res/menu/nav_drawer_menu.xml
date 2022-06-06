@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/miHome"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <!--
+                <item
+                    android:id="@+id/miTrip"
+                    android:icon="@drawable/ic_bus"
+                    android:title="Trip" />-->
+
+        <item
+            android:id="@+id/miNearby"
+            android:icon="@drawable/ic_baseline_location_searching_24"
+            android:title="Nearby" />
+        <item
+            android:id="@+id/miWeather"
+            android:icon="@drawable/ic_baseline_wb_sunny_24"
+            android:title="Weather" />
+        <item
+            android:id="@+id/miLocation"
+            android:icon="@drawable/ic_location"
+            android:title="Location" />
+
+
+    </group>
+
+
+    <item android:title="Planner">
+        <menu>
+            <item
+                android:id="@+id/miTask"
+                android:icon="@drawable/ic_baseline_more_vert_24"
+                android:title="Task" />
+            <item
+                android:id="@+id/miContact"
+                android:icon="@drawable/ic_person"
+                android:title="Tour Contacts" />
+
+        </menu>
+    </item>
+</menu>

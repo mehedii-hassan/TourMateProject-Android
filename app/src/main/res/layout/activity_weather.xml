@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".6" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutForecast"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/glWeather"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:context=".ui.WeatherActivity">
+
+
+            <TextView
+                android:id="@+id/tvCurrentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Current Date"
+                android:textColor="#FFC107"
+                android:textSize="12sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCurrentAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="26sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintStart_toStartOf="@+id/tvCurrentDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate" />
+
+            <ImageView
+                android:id="@+id/ivWeather"
+                android:layout_width="260dp"
+                android:layout_height="200dp"
+                android:src="@drawable/cloudy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentAdress" />
+
+
+            <TextView
+                android:id="@+id/tvCurrentTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:text="Temp"
+                android:textColor="@color/hot_pink"
+                android:textSize="50sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivWeather" />
+
+
+            <ImageView
+                android:id="@+id/ivCurrentIcon"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentTemp"
+                app:layout_constraintEnd_toStartOf="@+id/tvCurrentTemp"
+                app:layout_constraintTop_toTopOf="@+id/tvCurrentTemp" />
+
+            <TextView
+                android:id="@+id/tvCurrentFeelsLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="2dp"
+                android:text="FeelsLike"
+                android:textStyle="italic|bold"
+                app:layout_constraintStart_toStartOf="@+id/tvCurrentAdress"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemp" />
+
+            <TextView
+                android:id="@+id/tvCurrentCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:padding="2dp"
+                android:text="Condition"
+                android:textAllCaps="true"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toEndOf="@+id/tvCurrentFeelsLike"
+                app:layout_constraintTop_toTopOf="@+id/tvCurrentFeelsLike" />
+
+            <TextView
+                android:id="@+id/tvCurrentMaxMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="CurrentMaxMin"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/tvCurrentFeelsLike"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentFeelsLike" />
+
+            <TextView
+                android:id="@+id/tvCurrentHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="CurrentHumidity"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentMaxMin"
+                app:layout_constraintStart_toEndOf="@+id/tvCurrentMaxMin" />
+
+            <TextView
+                android:id="@+id/tvCurrentPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:padding="2dp"
+                android:text="CurrentPressure"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentMaxMin"
+                app:layout_constraintStart_toEndOf="@+id/tvCurrentHumidity" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvForecastWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"
+            android:text="5 Day / 3 Hour Forecast"
+            android:textSize="26sp"
+            android:textStyle="italic|bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/glWeather" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewForecast"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvForecastWeather" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
