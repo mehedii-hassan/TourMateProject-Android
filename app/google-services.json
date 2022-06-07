@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "700224504142",
+    "project_id": "tourmatenewproject",
+    "storage_bucket": "tourmatenewproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700224504142:android:754b018308c0e9bf1b5e1f",
+        "android_client_info": {
+          "package_name": "com.example.tourmatenewproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700224504142-0t4guvjjaun56t4r0i6uc7lethcunn31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1XVDoNN7IEWGi0k-N0xKL5HjxYGf8j4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700224504142-0t4guvjjaun56t4r0i6uc7lethcunn31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
