@@ -31,17 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         binding.btnUserLogin.setOnClickListener(view -> {
-            userLogin();
-            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            //userLogin();
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         });
 
-        binding.tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-            }
-        });
+        binding.tvSignUp.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
     }
 
     private void userLogin() {
@@ -73,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (password.length() < 6) {
             Toast.makeText(this, "wrong password", Toast.LENGTH_SHORT).show();
-            //etSignInUserPassword.setError("wrong password");
+            binding.etUserEmailPass.setError("wrong password");
             binding.etUserEmailPass.requestFocus();
 
         }

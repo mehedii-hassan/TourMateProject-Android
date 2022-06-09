@@ -1,5 +1,6 @@
 package com.example.tourmatenewproject.adapters;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListerner;
 import com.example.tourmatenewproject.databinding.GalleryRowDesignBinding;
 import com.example.tourmatenewproject.entities.TourImageModel;
 
@@ -16,10 +18,13 @@ import java.util.List;
 
 public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.GalleryViewHolder> {
 
-    List<TourImageModel> imageList;
+   private List<TourImageModel> imageList;
+   private OnGalleryImageItemClickListerner imageItemClickListerner;
 
-    public TourGalleryAdapter() {
+    public TourGalleryAdapter(Activity activity) {
+
         imageList = new ArrayList<>();
+        imageItemClickListerner= (OnGalleryImageItemClickListerner) activity;
     }
 
     @NonNull
@@ -33,8 +38,17 @@ public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
         final TourImageModel imageModel = imageList.get(position);
-        //holder.bind(imageModel);
-        holder.binding.imgViewGallery.setImageURI(Uri.parse(imageModel.getPhoto_path()));
+        int imagePosition=position;
+        holder.bind(imageModel);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                imageItemClickListerner.onImageItemClicked(imagePosition);
+
+            }
+        });
 
 
     }
@@ -56,6 +70,13 @@ public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.
         public GalleryViewHolder(GalleryRowDesignBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+
+        }
+
+        public void bind(TourImageModel imageModel) {
+            binding.imgViewGallery.setImageURI(Uri.parse(imageModel.getPhoto_path()));
+
         }
     }
 

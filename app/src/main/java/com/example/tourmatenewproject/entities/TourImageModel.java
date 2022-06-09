@@ -1,11 +1,14 @@
 package com.example.tourmatenewproject.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tbl_tour_image")
-public class TourImageModel {
+public class TourImageModel implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int img_id;
@@ -31,6 +34,24 @@ public class TourImageModel {
         this.img_id = img_id;
         this.trip_id = trip_id;
     }
+
+    protected TourImageModel(Parcel in) {
+        img_id = in.readInt();
+        photo_path = in.readString();
+        trip_id = in.readInt();
+    }
+
+    public static final Creator<TourImageModel> CREATOR = new Creator<TourImageModel>() {
+        @Override
+        public TourImageModel createFromParcel(Parcel in) {
+            return new TourImageModel(in);
+        }
+
+        @Override
+        public TourImageModel[] newArray(int size) {
+            return new TourImageModel[size];
+        }
+    };
 
     public String getPhoto_path() {
         return photo_path;
@@ -63,5 +84,17 @@ public class TourImageModel {
                 ", img_id=" + img_id +
                 ", trip_id=" + trip_id +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(img_id);
+        parcel.writeString(photo_path);
+        parcel.writeInt(trip_id);
     }
 }

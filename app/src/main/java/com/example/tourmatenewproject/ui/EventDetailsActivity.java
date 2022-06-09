@@ -3,7 +3,6 @@ package com.example.tourmatenewproject.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.metrics.Event;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -71,7 +70,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                 } else if (selected.equalsIgnoreCase("View gallery")) {
 
-                    startActivity(new Intent(EventDetailsActivity.this, PhotoGalleryActivity.class));
+                    startActivity(new Intent(EventDetailsActivity.this, GalleryActivity.class));
 
                 } else if (selected.equalsIgnoreCase("View all moments")) {
                     startActivity(new Intent(EventDetailsActivity.this, MomentsActivity.class));
