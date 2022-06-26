@@ -30,6 +30,7 @@ public class GalleryImageViewer extends AppCompatActivity {
 
         // TourImageModel model= getIntent().getParcelableExtra("model");
         int galleryImagePosition = getIntent().getIntExtra("position", 0);
+        binding.vpImageViewer.setCurrentItem(galleryImagePosition);
 
 
         GalleryImageViewerAdapter imageViewerAdapter = new GalleryImageViewerAdapter(galleryImagePosition);

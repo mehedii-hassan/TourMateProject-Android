@@ -20,6 +20,7 @@ public class GalleryImageViewerAdapter extends RecyclerView.Adapter<GalleryImage
     int imagePosition;
 
 
+
     public GalleryImageViewerAdapter(int imagePosition) {
         imageList = new ArrayList<>();
         this.imagePosition = imagePosition;

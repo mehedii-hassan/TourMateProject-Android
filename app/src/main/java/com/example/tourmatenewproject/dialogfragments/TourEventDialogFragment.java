@@ -119,7 +119,7 @@ public class TourEventDialogFragment extends DialogFragment {
                     final TourEventModel tourEventModel = new TourEventModel(tripName, tripDescription, tripStartLocation,
                             tripDestination, tripStartDate, tripEndDate, tripBudget, eventCreateDate, differenceInDays);
                     viewModel.addEvent(tourEventModel);
-                    //dismiss();
+                    dismiss();
                     Toast.makeText(getActivity(), "Successfully Inserted " + differenceInDays, Toast.LENGTH_SHORT).show();
                 }
             }
