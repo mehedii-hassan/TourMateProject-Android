@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TourMateNewProject/app/src/main/res/drawable-v24/custom_edittext_design.xml" value="0.1135" />
+        <entry key="..\:/TourMateNewProject/app/src/main/res/drawable-v24/ic_baseline_location_on_24.xml" value="0.1135" />
+        <entry key="..\:/TourMateNewProject/app/src/main/res/drawable-v24/ic_map_type.xml" value="0.1135" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/drawable/custom_button_design.xml" value="0.134" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/drawable/custom_toolbar_design.xml" value="0.127" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/drawable/ic_3dot_menu.xml" value="0.134" />
@@ -22,6 +25,7 @@
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_gallery_image_viewer.xml" value="0.18697916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_maps.xml" value="0.12832929782082325" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_moments.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_more_budget.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/activity_nearby.xml" value="0.20885416666666667" />
@@ -45,6 +49,7 @@
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/more_budget_row_design.xml" value="0.18" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/nav_header.xml" value="0.140625" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/layout/vp_image_holder.xml" value="0.1578125" />
+        <entry key="..\:/TourMateNewProject/app/src/main/res/menu/map_type_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/menu/nav_drawer_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/menu/rv_row_item_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/TourMateNewProject/app/src/main/res/xml/file_paths.xml" value="0.22447916666666667" />

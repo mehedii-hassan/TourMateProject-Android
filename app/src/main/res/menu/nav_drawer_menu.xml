@@ -5,11 +5,6 @@
             android:id="@+id/miHome"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home" />
-        <!--
-                <item
-                    android:id="@+id/miTrip"
-                    android:icon="@drawable/ic_bus"
-                    android:title="Trip" />-->
 
         <item
             android:id="@+id/miNearby"
@@ -19,10 +14,10 @@
             android:id="@+id/miWeather"
             android:icon="@drawable/ic_baseline_wb_sunny_24"
             android:title="Weather" />
-        <item
+       <!-- <item
             android:id="@+id/miLocation"
             android:icon="@drawable/ic_location"
-            android:title="Location" />
+            android:title="Location" />-->
 
 
     </group>

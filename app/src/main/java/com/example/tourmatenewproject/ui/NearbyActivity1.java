@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.tourmatenewproject.R;
 
-public class NearbyActivity extends AppCompatActivity {
+public class NearbyActivity1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

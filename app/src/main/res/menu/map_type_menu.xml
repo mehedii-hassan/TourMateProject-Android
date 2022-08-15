@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/mapDefault"
+        android:title="@string/map_default"
+        android:icon="@drawable/ic_baseline_home_24">
+    </item>
+
+    <item android:id="@+id/mapSatellite"
+        android:title="@string/satellite"
+        android:icon="@drawable/ic_baseline_satellite_24">
+    </item>
+
+    <item android:id="@+id/mapTerrain"
+        android:title="@string/terrain"
+        android:icon="@drawable/ic_baseline_terrain_24">
+    </item>
+</menu>

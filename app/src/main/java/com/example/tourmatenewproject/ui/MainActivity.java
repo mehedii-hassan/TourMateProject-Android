@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
                     startActivity(new Intent(this, MainActivity.class));
                     break;
                 case R.id.miNearby:
-                    startActivity(new Intent(this, NearbyActivity.class));
+                    startActivity(new Intent(this, NearByActivity.class));
                     break;
                 case R.id.miWeather:
                     startActivity(new Intent(this, WeatherActivity.class));

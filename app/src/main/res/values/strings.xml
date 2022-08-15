@@ -24,4 +24,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="title_activity_maps">NearByActivity</string>
+
+    //map
+    <string name="API_KEY">AIzaSyA5lNyJH60fIJ_u5VLxFrBPZRx7A-qYU6c</string>
+    <string name="map_default">Default</string>
+    <string name="terrain">Terrain</string>
+    <string name="satellite">Satellite</string>
+    <string name="todo">TODO</string>
+
+    <color name="primaryColor">#12A058</color>
+    <color name="primaryDarkColor">#12A058</color>
+    <color name="accentColor">#12A058</color>
 </resources>
