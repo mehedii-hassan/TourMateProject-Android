@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         binding.btnUserLogin.setOnClickListener(view -> {
-            userLogin();
-            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+           // userLogin();
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         });
 
         binding.tvSignUp.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));

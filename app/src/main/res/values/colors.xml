@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hot_pink">#ff69b4</color>
+
+    <color name="primaryColor">#12A058</color>
+    <color name="primaryDarkColor">#12A058</color>
+    <color name="accentColor">#12A058</color>
+    <color name="BigFootFeet">#ee8365</color>
 </resources>

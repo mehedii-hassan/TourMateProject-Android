@@ -10,6 +10,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/etCityName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_design_wa"
+            android:hint="Enter a Valid City "
+            android:padding="10dp"
+            android:textColor="@color/accentColor"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toStartOf="@+id/btnSearchCity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSearchCity"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/custom_button_design_wa"
+            android:padding="10dp"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/etCityName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etCityName" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glWeather"
@@ -25,8 +57,7 @@
             android:layout_height="0dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/glWeather"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/etCityName"
             tools:context=".ui.WeatherActivity">
 
 
@@ -55,8 +86,8 @@
 
             <ImageView
                 android:id="@+id/ivWeather"
-                android:layout_width="260dp"
-                android:layout_height="200dp"
+                android:layout_width="200dp"
+                android:layout_height="160dp"
                 android:src="@drawable/cloudy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,11 +98,11 @@
                 android:id="@+id/tvCurrentTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
+                android:layout_marginTop="15dp"
+                android:padding="5dp"
                 android:text="Temp"
-                android:textColor="@color/hot_pink"
-                android:textSize="50sp"
+                android:textColor="#ff69b4"
+                android:textSize="30sp"
                 android:textStyle="italic|bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,8 +185,9 @@
             android:paddingTop="10dp"
             android:paddingBottom="2dp"
             android:text="5 Day / 3 Hour Forecast"
-            android:textSize="26sp"
+            android:textSize="20sp"
             android:textStyle="italic|bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/glWeather" />
 

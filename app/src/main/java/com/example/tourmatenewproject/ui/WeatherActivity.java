@@ -5,21 +5,15 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.adapters.ForecastWeatherAdapter;
-import com.example.tourmatenewproject.adapters.TourExpenseAdapter;
 import com.example.tourmatenewproject.databinding.ActivityWeatherBinding;
 import com.example.tourmatenewproject.entities.current.CurrentResponseModel;
 import com.example.tourmatenewproject.entities.forecast.ForecastResponseModel;
-import com.example.tourmatenewproject.entities.forecast.ListItem;
 import com.example.tourmatenewproject.utils.Constants;
 import com.example.tourmatenewproject.utils.LocationPermissionService;
 import com.example.tourmatenewproject.utils.WeatherHelperFunctions;
@@ -29,13 +23,13 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
 
 public class WeatherActivity extends AppCompatActivity {
     private ActivityWeatherBinding binding;
     private final String TAG = WeatherActivity.class.getSimpleName();
     private WeatherViewModel weatherViewModel;
     private FusedLocationProviderClient providerClient;
+    private String cityName;
     private ActivityResultLauncher<String> launcher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
                 if (result) {
@@ -62,6 +56,14 @@ public class WeatherActivity extends AppCompatActivity {
         ForecastWeatherAdapter forecastWeatherAdapter = new ForecastWeatherAdapter();
         binding.recyclerViewForecast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recyclerViewForecast.setAdapter(forecastWeatherAdapter);
+
+        //set onclick listener with search city button
+        binding.btnSearchCity.setOnClickListener(v -> {
+            cityName = binding.etCityName.getText().toString().toLowerCase().trim();
+            weatherViewModel.setCityName(cityName);
+            weatherViewModel.loadDataWithCityName();
+            binding.etCityName.setText("");
+        });
 
         weatherViewModel.getCurrentLiveDate().observe(this, currentResponseModel -> {
             updateUI(currentResponseModel);

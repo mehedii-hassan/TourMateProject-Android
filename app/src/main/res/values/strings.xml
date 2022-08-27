@@ -33,7 +33,6 @@
     <string name="satellite">Satellite</string>
     <string name="todo">TODO</string>
 
-    <color name="primaryColor">#12A058</color>
-    <color name="primaryDarkColor">#12A058</color>
-    <color name="accentColor">#12A058</color>
+
+
 </resources>

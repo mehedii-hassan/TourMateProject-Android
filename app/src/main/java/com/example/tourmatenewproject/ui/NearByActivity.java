@@ -10,14 +10,9 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
-
 import com.example.tourmatenewproject.R;
-import com.example.tourmatenewproject.databinding.ActivityMapsBinding;
+import com.example.tourmatenewproject.databinding.ActivityNearbyBinding;
 import com.example.tourmatenewproject.entities.PlaceModel;
 import com.example.tourmatenewproject.utils.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -38,7 +33,7 @@ import com.google.android.material.chip.Chip;
 public class NearByActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
-    private ActivityMapsBinding binding;
+    private ActivityNearbyBinding binding;
     private FusedLocationProviderClient client;
 
     private LocationRequest locationRequest;
@@ -51,7 +46,7 @@ public class NearByActivity extends FragmentActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        binding = ActivityNearbyBinding.inflate(getLayoutInflater());
         //Remove status bar & make activity fullScreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
