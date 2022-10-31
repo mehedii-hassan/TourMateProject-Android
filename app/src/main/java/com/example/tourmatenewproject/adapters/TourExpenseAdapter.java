@@ -1,6 +1,7 @@
 package com.example.tourmatenewproject.adapters;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,6 +55,7 @@ public class TourExpenseAdapter extends RecyclerView.Adapter<TourExpenseAdapter.
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     public void submitNewExpenseList(List<TourExpenseModel> expenseList) {
         this.expenseList = expenseList;
         notifyDataSetChanged();

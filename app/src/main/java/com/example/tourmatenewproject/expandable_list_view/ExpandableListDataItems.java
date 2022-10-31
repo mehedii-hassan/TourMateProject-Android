@@ -18,7 +18,7 @@ public class ExpandableListDataItems {
         List<String> moments = new ArrayList<>();
         moments.add("Take a photo");
         moments.add("View gallery");
-        moments.add("View all moments");
+        //moments.add("View all moments");
 
         /*List<String> more_event = new ArrayList<>();
         more_event.add("Edit event");

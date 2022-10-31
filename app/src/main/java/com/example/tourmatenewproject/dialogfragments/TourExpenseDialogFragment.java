@@ -1,6 +1,5 @@
 package com.example.tourmatenewproject.dialogfragments;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;

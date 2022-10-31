@@ -2,6 +2,7 @@ package com.example.tourmatenewproject.adapters;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListerner;
+import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListener;
 import com.example.tourmatenewproject.databinding.GalleryRowDesignBinding;
 import com.example.tourmatenewproject.entities.TourImageModel;
 
@@ -18,13 +19,13 @@ import java.util.List;
 
 public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.GalleryViewHolder> {
 
-   private List<TourImageModel> imageList;
-   private OnGalleryImageItemClickListerner imageItemClickListerner;
+    private List<TourImageModel> imageList;
+    private OnGalleryImageItemClickListener imageItemClickListerner;
 
     public TourGalleryAdapter(Activity activity) {
 
         imageList = new ArrayList<>();
-        imageItemClickListerner= (OnGalleryImageItemClickListerner) activity;
+        imageItemClickListerner = (OnGalleryImageItemClickListener) activity;
     }
 
     @NonNull
@@ -38,14 +39,15 @@ public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
         final TourImageModel imageModel = imageList.get(position);
-        int imagePosition=position;
+        int imagePosition = holder.getAdapterPosition();
         holder.bind(imageModel);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                imageItemClickListerner.onImageItemClicked(imagePosition);
+                Log.e("Position","imagePosition"+imagePosition);
+                imageItemClickListerner.onImageItemClicked(view,imagePosition);
 
             }
         });
