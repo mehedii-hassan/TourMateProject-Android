@@ -32,7 +32,7 @@ public class TourImageViewModel extends AndroidViewModel {
         localRepository.updateImage(tourImage);
     }
 
-    public LiveData<List<TourImageModel>> getUserAllImages(int userId) {
-        return localRepository.getUserAllImages(userId);
+    public LiveData<List<TourImageModel>> getTripAllImages(int tripId) {
+        return localRepository.getTripAllImages(tripId);
     }
 }

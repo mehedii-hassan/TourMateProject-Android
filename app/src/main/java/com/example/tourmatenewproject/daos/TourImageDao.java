@@ -22,6 +22,6 @@ public interface TourImageDao {
     @Delete
     void deleteImage(TourImageModel tourImageModel);
 
-    @Query("select * from tbl_tour_image where user_id=:user_id")
-    LiveData<List<TourImageModel>> getUserAllImages(int user_id);
+    @Query("select * from tbl_tour_image where trip_id=:trip_id")
+    LiveData<List<TourImageModel>> getTripAllImages(int trip_id);
 }

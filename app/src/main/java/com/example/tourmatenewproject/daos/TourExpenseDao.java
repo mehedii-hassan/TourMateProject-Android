@@ -25,8 +25,8 @@ public interface TourExpenseDao {
     @Query("select * from tbl_tour_expense")
     LiveData<List<TourExpenseModel>> getAllExpenses();
 
-    @Query("select * from tbl_tour_expense where user_id=:user_id")
-    LiveData<List<TourExpenseModel>> getUserAllExpenses(int user_id);
+    @Query("select * from tbl_tour_expense where  trip_id=:trip_id")
+    LiveData<List<TourExpenseModel>> getTripAllExpenses(int trip_id);
 
 
 }

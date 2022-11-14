@@ -56,7 +56,7 @@ public class TourExpenseLocalRepository {
         return tourExpenseDao.getAllExpenses();
     }
 
-    public LiveData<List<TourExpenseModel>> getUserAllExpenses(int user_id) {
-        return tourExpenseDao.getUserAllExpenses(user_id);
+    public LiveData<List<TourExpenseModel>> getTripAllExpenses(int trip_id) {
+        return tourExpenseDao.getTripAllExpenses(trip_id);
     }
 }

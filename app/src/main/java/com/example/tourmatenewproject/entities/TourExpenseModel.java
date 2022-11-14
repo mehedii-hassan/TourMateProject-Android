@@ -13,24 +13,24 @@ public class TourExpenseModel implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int tour_expense_id;
-    @ColumnInfo(name = "user_id")
-    private int userId;
+    @ColumnInfo(name = "trip_id")
+    private int tripId;
     private int amount;
     private String comment;
     private String date;
     private int totalExpense;
 
-    public TourExpenseModel(int userId, int amount, String comment, String date) {
-        this.userId = userId;
+    public TourExpenseModel(int tripId, int amount, String comment, String date) {
+        this.tripId = tripId;
         this.amount = amount;
         this.comment = comment;
         this.date = date;
     }
 
     @Ignore
-    public TourExpenseModel(int tour_expense_id, int userId, int amount, String comment, String date) {
+    public TourExpenseModel(int tour_expense_id, int tripId, int amount, String comment, String date) {
         this.tour_expense_id = tour_expense_id;
-        this.userId = userId;
+        this.tripId = tripId;
         this.amount = amount;
         this.comment = comment;
         this.date = date;
@@ -38,7 +38,7 @@ public class TourExpenseModel implements Parcelable {
 
     protected TourExpenseModel(Parcel in) {
         tour_expense_id = in.readInt();
-        userId = in.readInt();
+        tripId = in.readInt();
         amount = in.readInt();
         comment = in.readString();
         date = in.readString();
@@ -65,12 +65,12 @@ public class TourExpenseModel implements Parcelable {
         this.tour_expense_id = tour_expense_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getTripId() {
+        return tripId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
     }
 
     public int getAmount() {
@@ -109,7 +109,7 @@ public class TourExpenseModel implements Parcelable {
     public String toString() {
         return "TourExpenseModel{" +
                 "tour_expense_id=" + tour_expense_id +
-                ", userId=" + userId +
+                ", userId=" + tripId +
                 ", amount=" + amount +
                 ", comment='" + comment + '\'' +
                 ", date='" + date + '\'' +
@@ -125,7 +125,7 @@ public class TourExpenseModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(tour_expense_id);
-        dest.writeInt(userId);
+        dest.writeInt(tripId);
         dest.writeInt(amount);
         dest.writeString(comment);
         dest.writeString(date);

@@ -32,8 +32,7 @@ public class TourExpenseViewModel extends AndroidViewModel {
         return localRepository.getAllExpenses();
     }
 
-    public LiveData<List<TourExpenseModel>> getUserAllExpenses(int user_id) {
-        return localRepository.getUserAllExpenses(user_id);
+    public LiveData<List<TourExpenseModel>> getTripAllExpenses(int trip_id) {
+        return localRepository.getTripAllExpenses(trip_id);
     }
-
 }

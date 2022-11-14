@@ -2,7 +2,6 @@ package com.example.tourmatenewproject.dialogfragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourmatenewproject.databinding.FragmentAddExpenseDialogBinding;
+import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
@@ -29,16 +29,17 @@ public class TourExpenseDialogFragment extends DialogFragment {
     private FragmentAddExpenseDialogBinding binding;
     private TourExpenseViewModel expenseViewModel;
     private int expenseId = 0;
-    private int expenseUserId = 0;
+    private int eventID = 0;
     private UserModel user;
+    private TourEventModel eventModel;
     private TourEventViewModel tourEventViewModel;
 
     public TourExpenseDialogFragment(TourExpenseModel tourExpense) {
         this.tourExpense = tourExpense;
     }
 
-    public TourExpenseDialogFragment(UserModel user) {
-        this.user = user;
+    public TourExpenseDialogFragment(TourEventModel eventModel) {
+        this.eventModel = eventModel;
     }
 
     @Nullable
@@ -51,7 +52,7 @@ public class TourExpenseDialogFragment extends DialogFragment {
         binding = FragmentAddExpenseDialogBinding.inflate(inflater, container, false);
 
         if (tourExpense != null) {
-            expenseUserId =tourExpense.getUserId();
+            eventID = eventModel.getTrip_id();
             expenseId = tourExpense.getTour_expense_id();
             binding.etComment.setText(tourExpense.getComment());
             binding.etAmount.setText(String.valueOf(tourExpense.getAmount()));
@@ -83,14 +84,14 @@ public class TourExpenseDialogFragment extends DialogFragment {
                 if (expenseId > 0) {
                     //update expense-------------
                     final int amount = Integer.parseInt(expenseAmount);
-                    final TourExpenseModel expense = new TourExpenseModel(expenseId,expenseUserId,amount, expenseComment, newDate);
+                    final TourExpenseModel expense = new TourExpenseModel(expenseId, eventID, amount, expenseComment, newDate);
                     expenseViewModel.updateExpense(expense);
                     dismiss();
                     Toast.makeText(view1.getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                 } else {
                     //insert new expense-----------
                     final int amount = Integer.parseInt(expenseAmount);
-                    final TourExpenseModel expense = new TourExpenseModel(user.getUserId(), amount, expenseComment, newDate);
+                    final TourExpenseModel expense = new TourExpenseModel(eventModel.getTrip_id(), amount, expenseComment, newDate);
                     expenseViewModel.addExpense(expense);
                     dismiss();
                     Toast.makeText(view1.getContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();

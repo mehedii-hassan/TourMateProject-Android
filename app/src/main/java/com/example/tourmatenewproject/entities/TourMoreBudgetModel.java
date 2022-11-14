@@ -9,23 +9,23 @@ import androidx.room.PrimaryKey;
 public class TourMoreBudgetModel {
     @PrimaryKey(autoGenerate = true)
     private int more_budget_id;
-    @ColumnInfo(name = "user_id")
-    private int userID;
+    @ColumnInfo(name = "trip_id")
+    private int tripID;
     private int more_budget_amount;
     private String taking_from_where;
     private String date;
 
-    public TourMoreBudgetModel(int userID, int more_budget_amount, String taking_from_where, String date) {
-        this.userID = userID;
+    public TourMoreBudgetModel(int tripID, int more_budget_amount, String taking_from_where, String date) {
+        this.tripID = tripID;
         this.more_budget_amount = more_budget_amount;
         this.taking_from_where = taking_from_where;
         this.date = date;
     }
 
     @Ignore
-    public TourMoreBudgetModel(int more_budget_id, int userID, int more_budget_amount, String taking_from_where, String date) {
+    public TourMoreBudgetModel(int more_budget_id, int tripID, int more_budget_amount, String taking_from_where, String date) {
         this.more_budget_id = more_budget_id;
-        this.userID = userID;
+        this.tripID = tripID;
         this.more_budget_amount = more_budget_amount;
         this.taking_from_where = taking_from_where;
         this.date = date;
@@ -39,12 +39,12 @@ public class TourMoreBudgetModel {
         this.more_budget_id = more_budget_id;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getTripID() {
+        return tripID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setTripID(int tripID) {
+        this.tripID = tripID;
     }
 
     public int getMore_budget_amount() {
@@ -75,7 +75,7 @@ public class TourMoreBudgetModel {
     public String toString() {
         return "TourMoreBudgetModel{" +
                 "more_budget_id=" + more_budget_id +
-                ", userID=" + userID +
+                ", userID=" + tripID +
                 ", more_budget_amount=" + more_budget_amount +
                 ", taking_from_where='" + taking_from_where + '\'' +
                 ", date='" + date + '\'' +

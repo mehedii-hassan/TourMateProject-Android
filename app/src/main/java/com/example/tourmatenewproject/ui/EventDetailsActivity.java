@@ -64,44 +64,45 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                 if (selected.equalsIgnoreCase("Add new expense")) {
 
-                    TourExpenseDialogFragment fragment = new TourExpenseDialogFragment(user);
+                    TourExpenseDialogFragment fragment = new TourExpenseDialogFragment(eventModel);
                     fragment.show(getSupportFragmentManager(), "Tour Expense");
 
                 } else if (selected.equalsIgnoreCase("View all expenses")) {
 
                     Intent intent = new Intent(EventDetailsActivity.this, ExpenseListActivity.class);
-                    intent.putExtra("user", user);
+                    //intent.putExtra("user", user);
+                    intent.putExtra("eventModel", eventModel);
                     startActivity(intent);
 
                 } else if (selected.equalsIgnoreCase("Add more budget")) {
 
-                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment(user);
+                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment(eventModel);
                     fragment.show(getSupportFragmentManager(), "Tour More Budget");
 
                 } else if (selected.equalsIgnoreCase("View more budget list")) {
 
                     Intent intent = new Intent(EventDetailsActivity.this, MoreBudgetActivity.class);
-                    intent.putExtra("user", user);
+                    intent.putExtra("eventModel", eventModel);
                     startActivity(intent);
                 } else if (selected.equalsIgnoreCase("Take a photo")) {
                     Intent intent = new Intent(EventDetailsActivity.this, CameraActivity.class);
-                    intent.putExtra("user", user);
+                    intent.putExtra("eventModel", eventModel);
                     startActivity(intent);
                 } else if (selected.equalsIgnoreCase("View gallery")) {
 
                     Intent intent = new Intent(EventDetailsActivity.this, GalleryActivity.class);
-                    intent.putExtra("user", user);
+                    intent.putExtra("eventModel", eventModel);
                     startActivity(intent);
                 } else if (selected.equalsIgnoreCase("View all moments")) {
                     Intent intent = new Intent(EventDetailsActivity.this, MomentsActivity.class);
-                    intent.putExtra("user", user);
+                    intent.putExtra("eventModel", eventModel);
                     startActivity(intent);
                 }
                 return true;
             }
         });
 
-        viewModel.getUserAllExpenses(user.getUserId()).observe(this, new Observer<List<TourExpenseModel>>() {
+        viewModel.getTripAllExpenses(eventModel.getTrip_id()).observe(this, new Observer<List<TourExpenseModel>>() {
             @Override
             public void onChanged(List<TourExpenseModel> expenseList) {
                 if (expenseList != null) {

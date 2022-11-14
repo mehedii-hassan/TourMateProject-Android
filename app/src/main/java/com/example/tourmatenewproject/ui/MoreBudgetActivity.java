@@ -17,6 +17,7 @@ import com.example.tourmatenewproject.callback.MoreBudgetEditListener;
 import com.example.tourmatenewproject.databinding.ActivityMoreBudgetBinding;
 import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
 import com.example.tourmatenewproject.dialogfragments.TourMoreBudgetDialogFragment;
+import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.TourMoreBudgetModel;
 import com.example.tourmatenewproject.entities.UserModel;
@@ -28,6 +29,7 @@ public class MoreBudgetActivity extends AppCompatActivity implements MoreBudgetD
     private ActivityMoreBudgetBinding binding;
     private TourMoreBudgetViewModel moreBudgetViewModel;
     private UserModel user;
+    private TourEventModel eventModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +40,14 @@ public class MoreBudgetActivity extends AppCompatActivity implements MoreBudgetD
         setContentView(binding.getRoot());
 
         //get user from intent -----------------
-        user = getIntent().getParcelableExtra("user");
+        //user = getIntent().getParcelableExtra("user");
+        eventModel = getIntent().getParcelableExtra("eventModel");
 
         TourMoreBudgetAdapter tourMoreBudgetAdapter = new TourMoreBudgetAdapter(this);
         binding.recyclerViewMB.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewMB.setAdapter(tourMoreBudgetAdapter);
 
-        moreBudgetViewModel.getUserAllMoreBudge(user.getUserId()).observe(this, new Observer<List<TourMoreBudgetModel>>() {
+        moreBudgetViewModel.getTripAllMoreBudget(eventModel.getTrip_id()).observe(this, new Observer<List<TourMoreBudgetModel>>() {
             @Override
             public void onChanged(List<TourMoreBudgetModel> moreBudgetList) {
                 tourMoreBudgetAdapter.submitNewExpenseList(moreBudgetList);

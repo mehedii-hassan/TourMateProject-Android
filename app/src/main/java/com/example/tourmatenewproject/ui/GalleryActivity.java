@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.tourmatenewproject.adapters.TourGalleryAdapter;
 import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListener;
 import com.example.tourmatenewproject.databinding.ActivityPhotoGalleryBinding;
+import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourImageModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourImageViewModel;
@@ -24,6 +25,7 @@ public class GalleryActivity extends AppCompatActivity implements OnGalleryImage
     private ActivityPhotoGalleryBinding binding;
     private TourImageViewModel imageViewModel;
     private UserModel user;
+    private TourEventModel eventModel;
 
 
     @Override
@@ -34,14 +36,16 @@ public class GalleryActivity extends AppCompatActivity implements OnGalleryImage
         setContentView(binding.getRoot());
 
         //get user from intent------------
-        user = getIntent().getParcelableExtra("user");
+        //user = getIntent().getParcelableExtra("user");
+        eventModel = getIntent().getParcelableExtra("eventModel");
+
 
         TourGalleryAdapter tourGalleryAdapter = new TourGalleryAdapter(this);
         binding.rvGallery.setLayoutManager(new GridLayoutManager(this, 4));
         binding.rvGallery.setAdapter(tourGalleryAdapter);
 
 
-        imageViewModel.getUserAllImages(user.getUserId()).observe(this, new Observer<List<TourImageModel>>() {
+        imageViewModel.getTripAllImages(eventModel.getTrip_id()).observe(this, new Observer<List<TourImageModel>>() {
             @Override
             public void onChanged(List<TourImageModel> imageList) {
                 tourGalleryAdapter.submitNewImageList(imageList);
@@ -54,6 +58,7 @@ public class GalleryActivity extends AppCompatActivity implements OnGalleryImage
         Intent intent = new Intent(this, GalleryImageViewer.class);
         intent.putExtra("position", position);
         intent.putExtra("user", user);
+        intent.putExtra("eventModel", eventModel);
         startActivity(intent);
     }
 

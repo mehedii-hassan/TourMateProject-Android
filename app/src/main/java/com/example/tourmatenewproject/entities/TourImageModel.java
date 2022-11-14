@@ -13,18 +13,18 @@ public class TourImageModel implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int img_id;
-    @ColumnInfo(name = "user_id")
-    private int userID;
+    @ColumnInfo(name = "trip_id")
+    private int tripID;
     private String photo_path;
 
-    public TourImageModel(int userID, String photo_path) {
-        this.userID = userID;
+    public TourImageModel(int tripID, String photo_path) {
+        this.tripID = tripID;
         this.photo_path = photo_path;
     }
 
     protected TourImageModel(Parcel in) {
         img_id = in.readInt();
-        userID = in.readInt();
+        tripID = in.readInt();
         photo_path = in.readString();
     }
 
@@ -48,12 +48,12 @@ public class TourImageModel implements Parcelable {
         this.img_id = img_id;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getTripID() {
+        return tripID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setTripID(int tripID) {
+        this.tripID = tripID;
     }
 
     public String getPhoto_path() {
@@ -68,7 +68,7 @@ public class TourImageModel implements Parcelable {
     public String toString() {
         return "TourImageModel{" +
                 "img_id=" + img_id +
-                ", userID=" + userID +
+                ", userID=" + tripID +
                 ", photo_path='" + photo_path + '\'' +
                 '}';
     }
@@ -81,7 +81,7 @@ public class TourImageModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(img_id);
-        dest.writeInt(userID);
+        dest.writeInt(tripID);
         dest.writeString(photo_path);
     }
 }

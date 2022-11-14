@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.tourmatenewproject.databinding.FragmentTourMoreBudgetDialogBinding;
+import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourMoreBudgetModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourMoreBudgetViewModel;
@@ -28,12 +29,14 @@ public class TourMoreBudgetDialogFragment extends DialogFragment {
     private FragmentTourMoreBudgetDialogBinding binding;
     private TourMoreBudgetViewModel moreBudgetViewModel;
     private int moreBudgetId = 0;
-    private int moreBudgetUserId = 0;
+    private int eventID = 0;
     private UserModel user;
+    private TourEventModel eventModel;
 
-    public TourMoreBudgetDialogFragment(UserModel user) {
+
+    public TourMoreBudgetDialogFragment(TourEventModel eventModel) {
         // Required empty public constructor
-        this.user = user;
+        this.eventModel = eventModel;
     }
 
     public TourMoreBudgetDialogFragment(TourMoreBudgetModel moreBudgetModel) {
@@ -48,7 +51,7 @@ public class TourMoreBudgetDialogFragment extends DialogFragment {
         binding = FragmentTourMoreBudgetDialogBinding.inflate(inflater, container, false);
 
         if (moreBudgetModel != null) {
-            moreBudgetUserId = moreBudgetModel.getUserID();
+            eventID = eventModel.getTrip_id();
             moreBudgetId = moreBudgetModel.getMore_budget_id();
             binding.etAmountMB.setText(String.valueOf(moreBudgetModel.getMore_budget_amount()));
             binding.etTakingFrom.setText(moreBudgetModel.getTaking_from_where());
@@ -79,7 +82,7 @@ public class TourMoreBudgetDialogFragment extends DialogFragment {
                     if (moreBudgetId > 0) {
                         //update more budget-------------
                         final int amount = Integer.parseInt(amountMB);
-                        final TourMoreBudgetModel moreBudgetModel = new TourMoreBudgetModel(moreBudgetId, moreBudgetUserId, amount, takingFromName, newDate);
+                        final TourMoreBudgetModel moreBudgetModel = new TourMoreBudgetModel(moreBudgetId, eventID, amount, takingFromName, newDate);
                         moreBudgetViewModel.updateMoreBudget(moreBudgetModel);
                         TourMoreBudgetDialogFragment.this.dismiss();
                         Toast.makeText(view12.getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
@@ -87,7 +90,7 @@ public class TourMoreBudgetDialogFragment extends DialogFragment {
                     } else {
                         //insert new more budget--------------------
                         final int amount = Integer.parseInt(amountMB);
-                        final TourMoreBudgetModel moreBudgetModel = new TourMoreBudgetModel(user.getUserId(), amount, takingFromName, newDate);
+                        final TourMoreBudgetModel moreBudgetModel = new TourMoreBudgetModel(eventModel.getTrip_id(), amount, takingFromName, newDate);
                         moreBudgetViewModel.addMoreBudget(moreBudgetModel);
                         TourMoreBudgetDialogFragment.this.dismiss();
                         Toast.makeText(view12.getContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();

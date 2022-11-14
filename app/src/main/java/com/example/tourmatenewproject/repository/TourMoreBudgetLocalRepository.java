@@ -52,7 +52,7 @@ public class TourMoreBudgetLocalRepository {
     }
 
 
-    public LiveData<List<TourMoreBudgetModel>> getUserAllMoreBudge(int userId) {
-        return moreBudgetDao.getUserAllMoreBudget(userId);
+    public LiveData<List<TourMoreBudgetModel>> getTripAllMoreBudget(int tripId) {
+        return moreBudgetDao.getTripAllMoreBudget(tripId);
     }
 }
