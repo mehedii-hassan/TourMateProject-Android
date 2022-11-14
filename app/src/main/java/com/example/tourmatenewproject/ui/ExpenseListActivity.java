@@ -19,6 +19,7 @@ import com.example.tourmatenewproject.databinding.ActivityExpenseListBinding;
 import com.example.tourmatenewproject.dialogfragments.TourEventDialogFragment;
 import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
 
     private ActivityExpenseListBinding binding;
     private TourExpenseViewModel expenseViewModel;
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,14 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
         binding = ActivityExpenseListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //get user from intent--------------
+        user = getIntent().getParcelableExtra("user");
 
         TourExpenseAdapter tourExpenseAdapter = new TourExpenseAdapter(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(tourExpenseAdapter);
 
-        expenseViewModel.getAllExpenses().observe(this, new Observer<List<TourExpenseModel>>() {
+        expenseViewModel.getUserAllExpenses(user.getUserId()).observe(this, new Observer<List<TourExpenseModel>>() {
             @Override
             public void onChanged(List<TourExpenseModel> expenseList) {
                 tourExpenseAdapter.submitNewExpenseList(expenseList);

@@ -1,10 +1,12 @@
 package com.example.tourmatenewproject.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,44 +14,36 @@ import android.widget.Toast;
 
 import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.databinding.ActivitySignUpBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.example.tourmatenewproject.entities.UserModel;
+import com.example.tourmatenewproject.viewmodels.UserViewModel;
 
 
-public class SignUpActivity extends AppCompatActivity {
+public class UserSignUpActivity extends AppCompatActivity {
 
 
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private androidx.appcompat.app.AlertDialog alertDialog;
     private ActivitySignUpBinding binding;
+    private UserViewModel userViewModel;
+    private UserModel userModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userViewModel = new ViewModelProvider(this)
+                .get(UserViewModel.class);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mAuth = FirebaseAuth.getInstance();
+        // mAuth = FirebaseAuth.getInstance();
 
-        binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.btnSignUp.setOnClickListener(view -> userSignUp());
 
-                userSignUp();
-
-            }
-        });
-
-        binding.tvLoginSU.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                finish();
-            }
+        binding.tvLoginSU.setOnClickListener(view -> {
+            startActivity(new Intent(UserSignUpActivity.this, LoginActivity.class));
+            finish();
         });
     }
 
@@ -76,34 +70,42 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void userSignUp() {
-        //String userName = etSignUpUserName.getText().toString().trim().toLowerCase();
+        String userName = binding.etUserName.getText().toString().trim().toLowerCase();
         String email = binding.etEmailAddress.getText().toString().trim();
         String password = binding.etEmailPassword.getText().toString().trim();
         String passConfirm = binding.etEmailConfirmPass.getText().toString().trim();
 
 
+        //Check user name is empty or not ---------------------------------
+        if (userName.isEmpty()) {
+            Toast.makeText(this, "Please enter your Name", Toast.LENGTH_SHORT).show();
+            binding.etUserName.requestFocus();
+        }
         //checking the validity of the email
         if (email.isEmpty()) {
-            binding.etEmailAddress.setError("Enter an email address");
+            //binding.etEmailAddress.setError("Enter an email address");
             binding.etEmailAddress.requestFocus();
+            Toast.makeText(this, "Please enter your Email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.etEmailAddress.setError("Enter a valid email address");
+            //binding.etEmailAddress.setError("Enter a valid email address");
             binding.etEmailAddress.requestFocus();
+            Toast.makeText(this, "Please enter a valid  Email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         //checking the validity of the password
         if (password.isEmpty()) {
-            binding.etEmailPassword.setError("Enter a password");
+            Toast.makeText(this, "Enter a password", Toast.LENGTH_SHORT).show();
+            //binding.etEmailPassword.setError("Enter a password");
             binding.etEmailPassword.requestFocus();
         }
         if (password.length() < 6) {
-            binding.etEmailPassword.setError("minimum length at least 6");
+            Toast.makeText(this, "Password length should be at least 6", Toast.LENGTH_SHORT).show();
+            //binding.etEmailPassword.setError("minimum length at least 6");
             binding.etEmailPassword.requestFocus();
-
         }
         //checking the validity of Confirm password
         if (passConfirm.isEmpty()) {
@@ -117,7 +119,34 @@ public class SignUpActivity extends AppCompatActivity {
 
         }
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+        //Check user registered or not----------------
+        userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel user) {
+                if (user != null) {
+                    userModel = user;
+                    Toast.makeText(UserSignUpActivity.this, "Already registered try another email", Toast.LENGTH_LONG).show();
+                    Log.e("TAG", user.getUserEmail());
+                } else {
+
+                    final UserModel newUser = new UserModel(userName, email, password, passConfirm);
+                    userViewModel.insertUser(newUser);
+                    binding.etUserName.setText("");
+                    binding.etEmailAddress.setText("");
+                    binding.etEmailPassword.setText("");
+                    binding.etEmailConfirmPass.setText("");
+                    Toast.makeText(UserSignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+
+
+
+        /*mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -135,6 +164,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
     }
 }

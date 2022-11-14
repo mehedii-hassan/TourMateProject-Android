@@ -2,6 +2,7 @@ package com.example.tourmatenewproject.dialogfragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourmatenewproject.databinding.FragmentAddExpenseDialogBinding;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
+import com.example.tourmatenewproject.entities.UserModel;
+import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
 import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.text.SimpleDateFormat;
@@ -26,12 +29,16 @@ public class TourExpenseDialogFragment extends DialogFragment {
     private FragmentAddExpenseDialogBinding binding;
     private TourExpenseViewModel expenseViewModel;
     private int expenseId = 0;
+    private int expenseUserId = 0;
+    private UserModel user;
+    private TourEventViewModel tourEventViewModel;
 
     public TourExpenseDialogFragment(TourExpenseModel tourExpense) {
         this.tourExpense = tourExpense;
     }
 
-    public TourExpenseDialogFragment() {
+    public TourExpenseDialogFragment(UserModel user) {
+        this.user = user;
     }
 
     @Nullable
@@ -40,9 +47,11 @@ public class TourExpenseDialogFragment extends DialogFragment {
 
         expenseViewModel = new ViewModelProvider(requireActivity())
                 .get(TourExpenseViewModel.class);
+
         binding = FragmentAddExpenseDialogBinding.inflate(inflater, container, false);
 
         if (tourExpense != null) {
+            expenseUserId =tourExpense.getUserId();
             expenseId = tourExpense.getTour_expense_id();
             binding.etComment.setText(tourExpense.getComment());
             binding.etAmount.setText(String.valueOf(tourExpense.getAmount()));
@@ -60,6 +69,7 @@ public class TourExpenseDialogFragment extends DialogFragment {
             final String expenseAmount = binding.etAmount.getText().toString().trim();
             final String expenseComment = binding.etComment.getText().toString().trim();
 
+
             long date = System.currentTimeMillis();
             Date d = new Date(date);
             SimpleDateFormat df = new SimpleDateFormat("MMM d, yyyy hh.mm aa");
@@ -73,14 +83,14 @@ public class TourExpenseDialogFragment extends DialogFragment {
                 if (expenseId > 0) {
                     //update expense-------------
                     final int amount = Integer.parseInt(expenseAmount);
-                    final TourExpenseModel expense = new TourExpenseModel(expenseId, amount, expenseComment, newDate);
+                    final TourExpenseModel expense = new TourExpenseModel(expenseId,expenseUserId,amount, expenseComment, newDate);
                     expenseViewModel.updateExpense(expense);
                     dismiss();
                     Toast.makeText(view1.getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                 } else {
                     //insert new expense-----------
                     final int amount = Integer.parseInt(expenseAmount);
-                    final TourExpenseModel expense = new TourExpenseModel(amount, expenseComment, newDate);
+                    final TourExpenseModel expense = new TourExpenseModel(user.getUserId(), amount, expenseComment, newDate);
                     expenseViewModel.addExpense(expense);
                     dismiss();
                     Toast.makeText(view1.getContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();

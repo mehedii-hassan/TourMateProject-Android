@@ -10,10 +10,10 @@ import com.example.tourmatenewproject.entities.TourEventModel;
 
 import java.util.List;
 
-public class TourEventsLocalRepository {
+public class TourEventLocalRepository {
     private final TourEventDao tourEventDao;
 
-    public TourEventsLocalRepository(Context context) {
+    public TourEventLocalRepository(Context context) {
         tourEventDao = TourEventsDatabase.getDb(context).getEventDao();
     }
 
@@ -55,4 +55,9 @@ public class TourEventsLocalRepository {
     public LiveData<List<TourEventModel>> getAllEvents() {
         return tourEventDao.getAllEvents();
     }
+
+    public LiveData<List<TourEventModel>> getUserAllEvents(int userId) {
+        return tourEventDao.getUserAllEvents(userId);
+    }
+
 }

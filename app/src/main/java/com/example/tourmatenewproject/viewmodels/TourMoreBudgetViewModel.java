@@ -31,7 +31,7 @@ public class TourMoreBudgetViewModel extends AndroidViewModel {
         moreBudgetLocalRepository.updateMoreBudge(tourMoreBudget);
     }
 
-    public LiveData<List<TourMoreBudgetModel>> getAllMoreBudget() {
-        return moreBudgetLocalRepository.getAllMoreBudge();
+    public LiveData<List<TourMoreBudgetModel>> getUserAllMoreBudge(int userId) {
+        return moreBudgetLocalRepository.getUserAllMoreBudge(userId);
     }
 }

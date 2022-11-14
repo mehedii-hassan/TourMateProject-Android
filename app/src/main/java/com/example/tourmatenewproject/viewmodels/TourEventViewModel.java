@@ -7,16 +7,16 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.tourmatenewproject.entities.TourEventModel;
-import com.example.tourmatenewproject.repository.TourEventsLocalRepository;
+import com.example.tourmatenewproject.repository.TourEventLocalRepository;
 
 import java.util.List;
 
 public class TourEventViewModel extends AndroidViewModel {
-    private TourEventsLocalRepository localRepository;
+    private TourEventLocalRepository localRepository;
 
     public TourEventViewModel(@NonNull Application application) {
         super(application);
-        localRepository = new TourEventsLocalRepository(application);
+        localRepository = new TourEventLocalRepository(application);
     }
 
     public void addEvent(TourEventModel tourEventModel) {
@@ -34,4 +34,9 @@ public class TourEventViewModel extends AndroidViewModel {
     public LiveData<List<TourEventModel>> getAllTourEvents() {
         return localRepository.getAllEvents();
     }
+
+    public LiveData<List<TourEventModel>> getUserAllEvents(int userId) {
+        return localRepository.getUserAllEvents(userId);
+    }
+
 }

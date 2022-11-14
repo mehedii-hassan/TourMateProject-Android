@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.tourmatenewproject.entities.TourEventModel;
+import com.example.tourmatenewproject.entities.relations.UserSignUpWithTourEvents;
 
 import java.util.List;
 
@@ -25,4 +27,9 @@ public interface TourEventDao {
 
     @Query("select * from tbl_tour_events")
     LiveData<List<TourEventModel>> getAllEvents();
+
+    @Query("select * from tbl_tour_events where user_id=:user_id")
+    LiveData<List<TourEventModel>> getUserAllEvents(int user_id);
+
+
 }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.databinding.ActivityCameraBinding;
 import com.example.tourmatenewproject.entities.TourImageModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourImageViewModel;
 
 import java.io.File;
@@ -31,15 +32,19 @@ public class CameraActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String currentPhotoPath;
     private TourImageViewModel imageViewModel;
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        imageViewModel=new ViewModelProvider(this)
+        imageViewModel = new ViewModelProvider(this)
                 .get(TourImageViewModel.class);
 
         binding = ActivityCameraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //get user from intent
+        user = getIntent().getParcelableExtra("user");
 
         dispatchTakePictureIntent();
 
@@ -76,7 +81,7 @@ public class CameraActivity extends AppCompatActivity {
            /* Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");*/
             //binding.imageView.setImageURI(Uri.parse(currentPhotoPath));
-            imageViewModel.addImage(new TourImageModel(currentPhotoPath));
+            imageViewModel.addImage(new TourImageModel(user.getUserId(), currentPhotoPath));
             finish();
             Toast.makeText(this, "Successfully image inserted", Toast.LENGTH_SHORT).show();
         }

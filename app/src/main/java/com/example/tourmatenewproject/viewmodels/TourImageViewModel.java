@@ -17,21 +17,22 @@ public class TourImageViewModel extends AndroidViewModel {
 
     public TourImageViewModel(@NonNull Application application) {
         super(application);
-        localRepository=new TourImageLocalRepository(application);
+        localRepository = new TourImageLocalRepository(application);
     }
 
     public void addImage(TourImageModel tourImage) {
         localRepository.addImage(tourImage);
     }
-     public void deleteImage(TourImageModel tourImage) {
+
+    public void deleteImage(TourImageModel tourImage) {
         localRepository.deleteImage(tourImage);
     }
-     public void updateImage(TourImageModel tourImage) {
+
+    public void updateImage(TourImageModel tourImage) {
         localRepository.updateImage(tourImage);
     }
 
-    public LiveData<List<TourImageModel>> getAllImages(){
-        return localRepository.getAllImages();
+    public LiveData<List<TourImageModel>> getUserAllImages(int userId) {
+        return localRepository.getUserAllImages(userId);
     }
-
 }

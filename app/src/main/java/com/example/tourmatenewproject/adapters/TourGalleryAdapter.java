@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListener;
 import com.example.tourmatenewproject.databinding.GalleryRowDesignBinding;
 import com.example.tourmatenewproject.entities.TourImageModel;
+import com.example.tourmatenewproject.entities.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,6 @@ public class TourGalleryAdapter extends RecyclerView.Adapter<TourGalleryAdapter.
     private OnGalleryImageItemClickListener imageItemClickListerner;
 
     public TourGalleryAdapter(Activity activity) {
-
         imageList = new ArrayList<>();
         imageItemClickListerner = (OnGalleryImageItemClickListener) activity;
     }

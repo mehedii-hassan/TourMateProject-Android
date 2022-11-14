@@ -2,8 +2,10 @@ package com.example.tourmatenewproject.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,17 +24,21 @@ import com.example.tourmatenewproject.databinding.ActivityMainBinding;
 import com.example.tourmatenewproject.databinding.CustomAlertDialogBinding;
 import com.example.tourmatenewproject.dialogfragments.TourEventDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements EventDeleteListener, EventEditListener, OnEventItemClickListener {
 
 
+    //private FirebaseAuth mAuth;
     private ActivityMainBinding binding;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private TourEventViewModel viewModel;
     private androidx.appcompat.app.AlertDialog alertDialog;
+    private UserModel user;
 
 
     @Override
@@ -41,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
         viewModel = new ViewModelProvider(this).get(TourEventViewModel.class);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        user = getIntent().getParcelableExtra("user");
+
+        // mAuth = FirebaseAuth.getInstance();
 
         //show toolbar effect---------------------------
         setSupportActionBar(binding.toolBarId);
@@ -52,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.btnAddEvent.setOnClickListener(view -> {
-            TourEventDialogFragment fragmentDialog = new TourEventDialogFragment();
+            TourEventDialogFragment fragmentDialog = new TourEventDialogFragment(user);
             fragmentDialog.show(getSupportFragmentManager(), "EventDialog");
         });
 
@@ -60,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
         binding.rvTourEvent.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvTourEvent.setAdapter(tourEventAdapter);
 
-        viewModel.getAllTourEvents().observe(this, new Observer<List<TourEventModel>>() {
+        viewModel.getUserAllEvents(user.getUserId()).observe(this, new Observer<List<TourEventModel>>() {
             @Override
             public void onChanged(List<TourEventModel> eventModelList) {
                 tourEventAdapter.submitNewEventList(eventModelList);
@@ -100,6 +110,13 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
+        }
+        if (item.getItemId() == R.menu.sign_out_menu) {
+
+            //mAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            Toast.makeText(this, "Successfully logged out", Toast.LENGTH_SHORT).show();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -144,7 +161,15 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
     public void onEventItemClicked(TourEventModel eventModel) {
         Intent intent = new Intent(MainActivity.this, EventDetailsActivity.class);
         intent.putExtra("eventModel", eventModel);
+        intent.putExtra("user",user);
         startActivity(intent);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sign_out_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 }

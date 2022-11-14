@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
@@ -14,6 +15,8 @@ public class TourEventModel implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     int trip_id;
+    @ColumnInfo(name = "user_id")
+    int userId;
     @ColumnInfo(name = "event_name")
     private String tripName;
     @ColumnInfo(name = "event_description")
@@ -32,11 +35,8 @@ public class TourEventModel implements Parcelable {
     private long how_many_days_left;
 
 
-/*private String createDate;
-    private String startDate;
-    private String howDaysLeft;*/
-
-    public TourEventModel(String tripName, String tripDescription, String tripStartLocation, String tripDestination, String tripStartDate, String tripEndDate, String tripBudget, String event_create_date, long how_many_days_left) {
+    public TourEventModel(int userId, String tripName, String tripDescription, String tripStartLocation, String tripDestination, String tripStartDate, String tripEndDate, String tripBudget, String event_create_date, long how_many_days_left) {
+        this.userId = userId;
         this.tripName = tripName;
         this.tripDescription = tripDescription;
         this.tripStartLocation = tripStartLocation;
@@ -49,8 +49,9 @@ public class TourEventModel implements Parcelable {
     }
 
     @Ignore
-    public TourEventModel(int trip_id, String tripName, String tripDescription, String tripStartLocation, String tripDestination, String tripStartDate, String tripEndDate, String tripBudget, String event_create_date, long how_many_days_left) {
+    public TourEventModel(int trip_id, int userId, String tripName, String tripDescription, String tripStartLocation, String tripDestination, String tripStartDate, String tripEndDate, String tripBudget, String event_create_date, long how_many_days_left) {
         this.trip_id = trip_id;
+        this.userId = userId;
         this.tripName = tripName;
         this.tripDescription = tripDescription;
         this.tripStartLocation = tripStartLocation;
@@ -62,9 +63,9 @@ public class TourEventModel implements Parcelable {
         this.how_many_days_left = how_many_days_left;
     }
 
-
     protected TourEventModel(Parcel in) {
         trip_id = in.readInt();
+        userId = in.readInt();
         tripName = in.readString();
         tripDescription = in.readString();
         tripStartLocation = in.readString();
@@ -94,6 +95,14 @@ public class TourEventModel implements Parcelable {
 
     public void setTrip_id(int trip_id) {
         this.trip_id = trip_id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTripName() {
@@ -172,6 +181,7 @@ public class TourEventModel implements Parcelable {
     public String toString() {
         return "TourEventModel{" +
                 "trip_id=" + trip_id +
+                ", userId=" + userId +
                 ", tripName='" + tripName + '\'' +
                 ", tripDescription='" + tripDescription + '\'' +
                 ", tripStartLocation='" + tripStartLocation + '\'' +
@@ -190,19 +200,17 @@ public class TourEventModel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-        parcel.writeInt(trip_id);
-        parcel.writeString(tripName);
-        parcel.writeString(tripDescription);
-        parcel.writeString(tripStartLocation);
-        parcel.writeString(tripDestination);
-        parcel.writeString(tripStartDate);
-        parcel.writeString(tripEndDate);
-        parcel.writeString(tripBudget);
-        parcel.writeString(event_create_date);
-        parcel.writeLong(how_many_days_left);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(trip_id);
+        dest.writeInt(userId);
+        dest.writeString(tripName);
+        dest.writeString(tripDescription);
+        dest.writeString(tripStartLocation);
+        dest.writeString(tripDestination);
+        dest.writeString(tripStartDate);
+        dest.writeString(tripEndDate);
+        dest.writeString(tripBudget);
+        dest.writeString(event_create_date);
+        dest.writeLong(how_many_days_left);
     }
-
-
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.example.tourmatenewproject.adapters.GalleryImageViewerAdapter;
 import com.example.tourmatenewproject.databinding.ActivityGalleryImageViewerBinding;
 import com.example.tourmatenewproject.entities.TourImageModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourImageViewModel;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class GalleryImageViewer extends AppCompatActivity {
 
     private ActivityGalleryImageViewerBinding binding;
     private TourImageViewModel imageViewModel;
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,12 @@ public class GalleryImageViewer extends AppCompatActivity {
         binding = ActivityGalleryImageViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //get user from intent -------------------
+        user = getIntent().getParcelableExtra("user");
+
         // TourImageModel model= getIntent().getParcelableExtra("model");
         int galleryImagePosition = getIntent().getIntExtra("position", 0);
-        binding.vpImageViewer.setCurrentItem(galleryImagePosition,true);
-
+        binding.vpImageViewer.setCurrentItem(galleryImagePosition, true);
 
 
         GalleryImageViewerAdapter imageViewerAdapter = new GalleryImageViewerAdapter(galleryImagePosition);
@@ -39,8 +43,7 @@ public class GalleryImageViewer extends AppCompatActivity {
         binding.vpImageViewer.setAdapter(imageViewerAdapter);
 
 
-
-        imageViewModel.getAllImages().observe(this, new Observer<List<TourImageModel>>() {
+        imageViewModel.getUserAllImages(user.getUserId()).observe(this, new Observer<List<TourImageModel>>() {
             @Override
             public void onChanged(List<TourImageModel> imageList) {
 

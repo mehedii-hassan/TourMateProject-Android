@@ -1,9 +1,14 @@
 package com.example.tourmatenewproject.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -12,7 +17,10 @@ import com.example.tourmatenewproject.databinding.ActivityEventDetailsBinding;
 import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
 import com.example.tourmatenewproject.dialogfragments.TourMoreBudgetDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
+import com.example.tourmatenewproject.entities.TourExpenseModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.expandable_list_view.ExpandableListDataItems;
+import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,14 +32,21 @@ public class EventDetailsActivity extends AppCompatActivity {
     private TourEventModel eventModel;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
+    private UserModel user;
+    private TourExpenseViewModel viewModel;
+    private List<TourExpenseModel> expenseModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(TourExpenseViewModel.class);
         binding = ActivityEventDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //get user and event model from intent ------------------
         eventModel = getIntent().getParcelableExtra("eventModel");
+        user = getIntent().getParcelableExtra("user");
+        Log.e("TAG", "email " + user.getUserEmail());
         bind(eventModel);
 
         listDataChild = ExpandableListDataItems.getData();
@@ -49,42 +64,72 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                 if (selected.equalsIgnoreCase("Add new expense")) {
 
-                    TourExpenseDialogFragment fragment = new TourExpenseDialogFragment();
+                    TourExpenseDialogFragment fragment = new TourExpenseDialogFragment(user);
                     fragment.show(getSupportFragmentManager(), "Tour Expense");
 
                 } else if (selected.equalsIgnoreCase("View all expenses")) {
 
-                    startActivity(new Intent(EventDetailsActivity.this, ExpenseListActivity.class));
+                    Intent intent = new Intent(EventDetailsActivity.this, ExpenseListActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
 
                 } else if (selected.equalsIgnoreCase("Add more budget")) {
 
-                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment();
+                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment(user);
                     fragment.show(getSupportFragmentManager(), "Tour More Budget");
 
                 } else if (selected.equalsIgnoreCase("View more budget list")) {
 
-                    startActivity(new Intent(EventDetailsActivity.this, MoreBudgetActivity.class));
-
+                    Intent intent = new Intent(EventDetailsActivity.this, MoreBudgetActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
                 } else if (selected.equalsIgnoreCase("Take a photo")) {
-                    startActivity(new Intent(EventDetailsActivity.this, CameraActivity.class));
-
+                    Intent intent = new Intent(EventDetailsActivity.this, CameraActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
                 } else if (selected.equalsIgnoreCase("View gallery")) {
 
-                    startActivity(new Intent(EventDetailsActivity.this, GalleryActivity.class));
-
+                    Intent intent = new Intent(EventDetailsActivity.this, GalleryActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
                 } else if (selected.equalsIgnoreCase("View all moments")) {
-                    startActivity(new Intent(EventDetailsActivity.this, MomentsActivity.class));
-
+                    Intent intent = new Intent(EventDetailsActivity.this, MomentsActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
                 }
                 return true;
             }
         });
 
+        viewModel.getUserAllExpenses(user.getUserId()).observe(this, new Observer<List<TourExpenseModel>>() {
+            @Override
+            public void onChanged(List<TourExpenseModel> expenseList) {
+                if (expenseList != null) {
+                    int totalExpenseSum = 0;
+                    for (TourExpenseModel model : expenseList) {
 
+                        int temp = model.getAmount();
+                        totalExpenseSum = totalExpenseSum + temp;
+                    }
+
+                    int tripBudget = Integer.parseInt(eventModel.getTripBudget());
+                    int calculatePercent = (totalExpenseSum * 100) / tripBudget;
+                    binding.tvPercent.setText(String.valueOf(calculatePercent));
+                   /* if (calculatePercent > 79) {
+                        binding.progressBarId.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                    }*/
+                    binding.progressBarId.setProgress(calculatePercent);
+                    Log.e("TAG", "totalsum: " + calculatePercent);
+
+                }
+            }
+        });
     }
 
     public void bind(TourEventModel eventModel) {
         binding.setEventModel(eventModel);
     }
+
+
 }
 

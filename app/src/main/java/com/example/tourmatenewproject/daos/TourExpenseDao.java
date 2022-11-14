@@ -6,7 +6,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
 import com.example.tourmatenewproject.entities.TourExpenseModel;
+
 import java.util.List;
 
 @Dao
@@ -22,6 +24,9 @@ public interface TourExpenseDao {
 
     @Query("select * from tbl_tour_expense")
     LiveData<List<TourExpenseModel>> getAllExpenses();
+
+    @Query("select * from tbl_tour_expense where user_id=:user_id")
+    LiveData<List<TourExpenseModel>> getUserAllExpenses(int user_id);
 
 
 }

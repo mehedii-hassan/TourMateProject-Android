@@ -26,4 +26,7 @@ public interface TourMoreBudgetDao {
     @Query("select * from tbl_more_budget")
     LiveData<List<TourMoreBudgetModel>> getAllMoreBudget();
 
+    @Query("select * from tbl_more_budget where user_id=:user_id")
+    LiveData<List<TourMoreBudgetModel>> getUserAllMoreBudget(int user_id);
+
 }

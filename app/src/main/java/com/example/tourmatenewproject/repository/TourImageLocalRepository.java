@@ -44,7 +44,7 @@ public class TourImageLocalRepository {
         });
     }
 
-    public LiveData<List<TourImageModel>> getAllImages() {
-        return tourImageDao.getAllImages();
+    public LiveData<List<TourImageModel>> getUserAllImages(int userId) {
+        return tourImageDao.getUserAllImages(userId);
     }
 }

@@ -18,6 +18,7 @@ import com.example.tourmatenewproject.callback.MomentsEditListener;
 import com.example.tourmatenewproject.databinding.ActivityMomentsBinding;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.TourImageModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourImageViewModel;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
 public class MomentsActivity extends AppCompatActivity implements MomentsDeleteListener, MomentsEditListener {
     private ActivityMomentsBinding binding;
     private TourImageViewModel imageViewModel;
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class MomentsActivity extends AppCompatActivity implements MomentsDeleteL
         binding = ActivityMomentsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //get user from intent -----------------
+        user = getIntent().getParcelableExtra("user");
+
 
         TourImageAdapter tourImageAdapter = new TourImageAdapter(this);
         binding.rvMoments.setLayoutManager(new LinearLayoutManager(this));
@@ -40,7 +45,7 @@ public class MomentsActivity extends AppCompatActivity implements MomentsDeleteL
         binding.rvMoments.setHasFixedSize(true);
         binding.rvMoments.setItemViewCacheSize(20);
 
-        imageViewModel.getAllImages().observe(this, new Observer<List<TourImageModel>>() {
+        imageViewModel.getUserAllImages(user.getUserId()).observe(this, new Observer<List<TourImageModel>>() {
             @Override
             public void onChanged(List<TourImageModel> imageList) {
                 tourImageAdapter.submitNewImageList(imageList);

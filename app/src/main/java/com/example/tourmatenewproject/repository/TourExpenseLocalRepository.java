@@ -1,7 +1,9 @@
 package com.example.tourmatenewproject.repository;
 
 import android.content.Context;
+
 import androidx.lifecycle.LiveData;
+
 import com.example.tourmatenewproject.daos.TourExpenseDao;
 import com.example.tourmatenewproject.db.TourEventsDatabase;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
@@ -52,5 +54,9 @@ public class TourExpenseLocalRepository {
 
     public LiveData<List<TourExpenseModel>> getAllExpenses() {
         return tourExpenseDao.getAllExpenses();
+    }
+
+    public LiveData<List<TourExpenseModel>> getUserAllExpenses(int user_id) {
+        return tourExpenseDao.getUserAllExpenses(user_id);
     }
 }

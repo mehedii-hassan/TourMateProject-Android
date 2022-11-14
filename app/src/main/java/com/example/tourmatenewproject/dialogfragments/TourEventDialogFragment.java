@@ -2,6 +2,7 @@ package com.example.tourmatenewproject.dialogfragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourmatenewproject.databinding.FragmentEventDialogBinding;
 import com.example.tourmatenewproject.entities.TourEventModel;
+import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -30,13 +32,16 @@ public class TourEventDialogFragment extends DialogFragment {
     private TourEventViewModel viewModel;
     private TourEventModel tourEvent;
     private int tripId = 0;
+    private int tripUserId = 0;
+    private UserModel user;
 
     public TourEventDialogFragment(TourEventModel tourEvent) {
         this.tourEvent = tourEvent;
     }
 
-    public TourEventDialogFragment() {
+    public TourEventDialogFragment(UserModel user) {
 
+        this.user = user;
     }
 
     @Nullable
@@ -49,6 +54,8 @@ public class TourEventDialogFragment extends DialogFragment {
 
         if (tourEvent != null) {
             tripId = tourEvent.getTrip_id();
+            tripUserId = tourEvent.getUserId();
+            Log.e("TAG", "tripid : " + tripId);
             binding.etTripName.setText(tourEvent.getTripName());
             binding.etTripDescription.setText(tourEvent.getTripDescription());
             binding.etTripStartLocation.setText(tourEvent.getTripStartLocation());
@@ -109,14 +116,14 @@ public class TourEventDialogFragment extends DialogFragment {
 
                 if (tripId > 0) {
                     //update event-----------------------
-                    final TourEventModel tourEvent = new TourEventModel(tripId, tripName, tripDescription, tripStartLocation,
+                    final TourEventModel tourEvent = new TourEventModel(tripId, tripUserId, tripName, tripDescription, tripStartLocation,
                             tripDestination, tripStartDate, tripEndDate, tripBudget, eventCreateDate, differenceInDays);
                     viewModel.updateEvent(tourEvent);
                     dismiss();
                     Toast.makeText(getActivity(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                 } else {
                     //insert new event--------------------
-                    final TourEventModel tourEventModel = new TourEventModel(tripName, tripDescription, tripStartLocation,
+                    final TourEventModel tourEventModel = new TourEventModel(user.getUserId(), tripName, tripDescription, tripStartLocation,
                             tripDestination, tripStartDate, tripEndDate, tripBudget, eventCreateDate, differenceInDays);
                     viewModel.addEvent(tourEventModel);
                     dismiss();

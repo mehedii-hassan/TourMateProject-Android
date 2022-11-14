@@ -2,13 +2,16 @@ package com.example.tourmatenewproject.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.tourmatenewproject.databinding.ActivityLoginBinding;
+import com.example.tourmatenewproject.entities.UserModel;
+import com.example.tourmatenewproject.viewmodels.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -17,7 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private FirebaseAuth mAuth;
+    private UserViewModel viewModel;
+    //private FirebaseAuth mAuth;
     //private androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder;
     //private androidx.appcompat.app.AlertDialog alertDialog;
 
@@ -25,55 +29,79 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         binding.btnUserLogin.setOnClickListener(view -> {
            userLogin();
             //startActivity(new Intent(LoginActivity.this, MainActivity.class));
         });
 
-        binding.tvSignUp.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
+        binding.tvSignUp.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, UserSignUpActivity.class)));
     }
 
     private void userLogin() {
         String email = binding.etUserEmail.getText().toString().trim();
-        String password = binding.etUserEmailPass.getText().toString().trim();
-
+        String password = binding.etUserEmail.getText().toString().trim();
 
         //checking the validity of the email
         if (email.isEmpty()) {
-            //etSignUpUserEmail.setError("Enter your email address");
-            Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+            //binding.etEmailAddress.setError("Enter an email address");
+            binding.etUserEmail.requestFocus();
+            Toast.makeText(this, "Please enter your Email", Toast.LENGTH_SHORT).show();
             binding.etUserEmail.requestFocus();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            //etSignUpUserEmail.setError("Enter a valid email address");
-            Toast.makeText(this, "Enter a valid email address", Toast.LENGTH_SHORT).show();
+            //binding.etEmailAddress.setError("Enter a valid email address");
+            binding.etUserEmail.requestFocus();
+            Toast.makeText(this, "Please enter a valid  Email", Toast.LENGTH_SHORT).show();
             binding.etUserEmail.requestFocus();
             return;
         }
 
         //checking the validity of the password
         if (password.isEmpty()) {
-            //Toast.makeText(this, "Enter your password", Toast.LENGTH_SHORT).show();
-            binding.etUserEmailPass.setError("Enter your password");
-            binding.etUserEmailPass.requestFocus();
+            Toast.makeText(this, "Enter a password", Toast.LENGTH_SHORT).show();
+            //binding.etEmailPassword.setError("Enter a password");
+            binding.etUserEmail.requestFocus();
+            return;
         }
-
         if (password.length() < 6) {
-            Toast.makeText(this, "wrong password", Toast.LENGTH_SHORT).show();
-            binding.etUserEmailPass.setError("wrong password");
-            binding.etUserEmailPass.requestFocus();
-
+            Toast.makeText(this, "Password length should be at least 6", Toast.LENGTH_SHORT).show();
+            //binding.etEmailPassword.setError("minimum length at least 6");
+            binding.etUserEmail.requestFocus();
+            return;
         }
+        viewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel user) {
 
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                if (user != null) {
+                    if (!user.getUserPassword().equals(binding.etUserEmailPass.getText().toString().trim())) {
+                        Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid email", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+
+       /* mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -87,6 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
 }
