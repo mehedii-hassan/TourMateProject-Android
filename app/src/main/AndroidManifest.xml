@@ -11,7 +11,6 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
     <application
         android:allowBackup="true"
@@ -21,7 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TourMateNewProject"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ui.PasswordResetActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -70,14 +75,14 @@
         <activity
             android:name=".ui.MoreBudgetActivity"
             android:exported="false"
-            android:parentActivityName=".ui.EventDetailsActivity"/>
+            android:parentActivityName=".ui.EventDetailsActivity" />
         <activity
             android:name=".ui.ExpenseListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.EventDetailsActivity"
             android:exported="false"
-            android:parentActivityName=".ui.MainActivity"/>
+            android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tbl_user_info")
@@ -25,6 +26,16 @@ public class UserModel implements Parcelable {
         this.userPassword = userPassword;
         this.userConfirmPass = userConfirmPass;
     }
+
+    @Ignore
+    public UserModel(int userId, String userName, String userEmail, String userPassword, String userConfirmPass) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userConfirmPass = userConfirmPass;
+    }
+
 
     protected UserModel(Parcel in) {
         userId = in.readInt();

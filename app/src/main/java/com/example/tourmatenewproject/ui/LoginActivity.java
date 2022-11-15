@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.tourmatenewproject.databinding.ActivityLoginBinding;
@@ -35,8 +36,16 @@ public class LoginActivity extends AppCompatActivity {
 
         //mAuth = FirebaseAuth.getInstance();
 
+        binding.tvForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class));
+
+            }
+        });
+
         binding.btnUserLogin.setOnClickListener(view -> {
-           userLogin();
+            userLogin();
             //startActivity(new Intent(LoginActivity.this, MainActivity.class));
         });
 
@@ -88,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("user",user);
+                    intent.putExtra("user", user);
                     startActivity(intent);
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
                     finish();
