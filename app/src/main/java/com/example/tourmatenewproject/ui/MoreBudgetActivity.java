@@ -43,6 +43,13 @@ public class MoreBudgetActivity extends AppCompatActivity implements MoreBudgetD
         //user = getIntent().getParcelableExtra("user");
         eventModel = getIntent().getParcelableExtra("eventModel");
 
+        binding.fabMB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         TourMoreBudgetAdapter tourMoreBudgetAdapter = new TourMoreBudgetAdapter(this);
         binding.recyclerViewMB.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewMB.setAdapter(tourMoreBudgetAdapter);

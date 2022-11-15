@@ -45,6 +45,13 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
         //user = getIntent().getParcelableExtra("user");
         tourEventModel = getIntent().getParcelableExtra("eventModel");
 
+        binding.fabEL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         TourExpenseAdapter tourExpenseAdapter = new TourExpenseAdapter(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(tourExpenseAdapter);

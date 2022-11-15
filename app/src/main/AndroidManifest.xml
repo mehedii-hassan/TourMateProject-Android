@@ -69,13 +69,15 @@
             android:exported="false" />
         <activity
             android:name=".ui.MoreBudgetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.EventDetailsActivity"/>
         <activity
             android:name=".ui.ExpenseListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.EventDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity"/>
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">

@@ -90,13 +90,25 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
 
             switch (item.getItemId()) {
                 case R.id.miHome:
-                    startActivity(new Intent(this, MainActivity.class));
+                    binding.drawerLayoutId.closeDrawers();
+                    //startActivity(new Intent(this, MainActivity.class));
                     break;
                 case R.id.miNearby:
                     startActivity(new Intent(this, NearByActivity.class));
                     break;
                 case R.id.miWeather:
                     startActivity(new Intent(this, WeatherActivity.class));
+                    break;
+                case R.id.miAbout:
+                    Toast.makeText(this, "Future Planning", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.miContact:
+                    Toast.makeText(this, "Future Planning ", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.miSignOut:
+                    startActivity(new Intent(this, LoginActivity.class));
+                    Toast.makeText(this, "Successfully logged out", Toast.LENGTH_SHORT).show();
+                    finish();
                     break;
             }
             return false;
@@ -111,13 +123,13 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (item.getItemId() == R.menu.sign_out_menu) {
+       /* if (item.getItemId() == R.menu.sign_out_menu) {
 
-            //mAuth.signOut();
+            mAuth.signOut();
             startActivity(new Intent(this, LoginActivity.class));
             Toast.makeText(this, "Successfully logged out", Toast.LENGTH_SHORT).show();
             finish();
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -161,15 +173,15 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
     public void onEventItemClicked(TourEventModel eventModel) {
         Intent intent = new Intent(MainActivity.this, EventDetailsActivity.class);
         intent.putExtra("eventModel", eventModel);
-        intent.putExtra("user",user);
+        intent.putExtra("user", user);
         startActivity(intent);
 
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sign_out_menu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
 }

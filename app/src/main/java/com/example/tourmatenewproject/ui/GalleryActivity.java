@@ -39,6 +39,12 @@ public class GalleryActivity extends AppCompatActivity implements OnGalleryImage
         //user = getIntent().getParcelableExtra("user");
         eventModel = getIntent().getParcelableExtra("eventModel");
 
+        binding.fabGA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         TourGalleryAdapter tourGalleryAdapter = new TourGalleryAdapter(this);
         binding.rvGallery.setLayoutManager(new GridLayoutManager(this, 4));
@@ -49,6 +55,14 @@ public class GalleryActivity extends AppCompatActivity implements OnGalleryImage
             @Override
             public void onChanged(List<TourImageModel> imageList) {
                 tourGalleryAdapter.submitNewImageList(imageList);
+
+                if (imageList.size() > 0) {
+                    binding.tvEmptyGallery.setVisibility(View.GONE);
+                    binding.rvGallery.setVisibility(View.VISIBLE);
+                } else {
+                    binding.tvEmptyGallery.setVisibility(View.VISIBLE);
+                    binding.rvGallery.setVisibility(View.GONE);
+                }
             }
         });
     }

@@ -12,18 +12,46 @@
         android:layout_height="match_parent"
         tools:context=".ui.GalleryActivity">
 
-        <TextView
-            android:id="@+id/tvPhotos"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintGA"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Photos"
-            android:textColor="@color/hot_pink"
-            android:textSize="22sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/white"
+            android:padding="2dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabGA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:borderWidth="0dp"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxImageSize="30dp"
+                app:tint="#FF9800" />
+
+            <TextView
+                android:id="@+id/tvNameGA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="Photo Gallery"
+                android:textAlignment="center"
+                android:textColor="#ff69b4"
+                android:textSize="22sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fabGA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fabGA" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvGallery"
@@ -31,7 +59,18 @@
             android:layout_height="0dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPhotos" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintGA" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Empty gallery!"
+            android:textSize="12sp"
+            android:id="@+id/tvEmptyGallery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintGA" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

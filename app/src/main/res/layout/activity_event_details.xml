@@ -16,15 +16,27 @@
         android:layout_height="match_parent"
         tools:context=".ui.EventDetailsActivity">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEventDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="30dp"
+            app:tint="#FF9800" />
+
         <TextView
             android:id="@+id/tvEDTourName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:paddingStart="16dp"
-            android:paddingTop="16dp"
             android:paddingEnd="16dp"
-            android:paddingBottom="0dp"
             android:text="@{eventModel.tripName}"
             android:textColor="#ff69b4"
             android:textSize="25sp"
@@ -32,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/fabEventDetails" />
 
 
         <androidx.cardview.widget.CardView

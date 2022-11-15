@@ -14,25 +14,29 @@
             android:id="@+id/miWeather"
             android:icon="@drawable/ic_baseline_wb_sunny_24"
             android:title="Weather" />
-       <!-- <item
-            android:id="@+id/miLocation"
-            android:icon="@drawable/ic_location"
-            android:title="Location" />-->
+        <!-- <item
+             android:id="@+id/miLocation"
+             android:icon="@drawable/ic_location"
+             android:title="Location" />-->
 
 
     </group>
 
 
-    <item android:title="Planner">
+    <item android:title="">
         <menu>
             <item
-                android:id="@+id/miTask"
-                android:icon="@drawable/ic_baseline_more_vert_24"
-                android:title="Task" />
+                android:id="@+id/miAbout"
+                android:icon="@drawable/ic_baseline_info_24"
+                android:title="About" />
             <item
                 android:id="@+id/miContact"
                 android:icon="@drawable/ic_person"
                 android:title="Tour Contacts" />
+            <item
+                android:id="@+id/miSignOut"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                android:title="Sign Out" />
 
         </menu>
     </item>

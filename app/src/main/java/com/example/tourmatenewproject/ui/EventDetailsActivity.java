@@ -55,6 +55,12 @@ public class EventDetailsActivity extends AppCompatActivity {
         ExpandableListAdapter expandableListAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         binding.expandableLV.setAdapter(expandableListAdapter);
 
+        binding.fabEventDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         binding.expandableLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
