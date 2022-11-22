@@ -19,6 +19,10 @@ public interface UserDao {
     @Update
     void updateUser(UserModel userModel);
 
+
+    /*@Query("SELECT EXISTS(SELECT * from tbl_user where email=:email And pass=:pass)")
+    boolean isEmailAndPassMatches(String email,String pass);*/
+
     @Delete
     void deleteUser(UserModel userModel);
 

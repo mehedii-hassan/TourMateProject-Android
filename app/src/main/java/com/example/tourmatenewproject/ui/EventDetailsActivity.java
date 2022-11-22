@@ -23,12 +23,13 @@ import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.expandable_list_view.ExpandableListDataItems;
 import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
 import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
+import com.example.tourmatenewproject.viewmodels.TourMoreBudgetViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class EventDetailsActivity extends AppCompatActivity implements DataPass {
+public class EventDetailsActivity extends AppCompatActivity {
 
     private ActivityEventDetailsBinding binding;
     private TourEventModel eventModel;
@@ -38,13 +39,13 @@ public class EventDetailsActivity extends AppCompatActivity implements DataPass 
     private TourExpenseViewModel viewModel;
     private List<TourExpenseModel> expenseModelList;
     private TourEventViewModel tourEventViewModel;
-    private TourMoreBudgetModel model;
-    int amount;
+    private TourMoreBudgetViewModel moreBudgetViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(TourExpenseViewModel.class);
+        moreBudgetViewModel = new ViewModelProvider(this).get(TourMoreBudgetViewModel.class);
         binding = ActivityEventDetailsBinding.inflate(getLayoutInflater());
         tourEventViewModel = new ViewModelProvider(this)
                 .get(TourEventViewModel.class);
@@ -54,14 +55,6 @@ public class EventDetailsActivity extends AppCompatActivity implements DataPass 
         //get user and event model from intent ------------------
         eventModel = getIntent().getParcelableExtra("eventModel");
         user = getIntent().getParcelableExtra("user");
-        model = getIntent().getParcelableExtra("model");
-
-        //Log.e("TAG", "email " + user.getUserEmail());
-        if (model != null) {
-
-            binding.tvId.setText(String.valueOf(model.getMore_budget_amount()));
-            //Log.e("TAG", "model onCreate  " + model.getMore_budget_amount());
-        }
 
 
         bind(eventModel);
@@ -126,6 +119,22 @@ public class EventDetailsActivity extends AppCompatActivity implements DataPass 
             }
         });
 
+        moreBudgetViewModel.getTripAllMoreBudget(eventModel.getTrip_id()).observe(this, new Observer<List<TourMoreBudgetModel>>() {
+            @Override
+            public void onChanged(List<TourMoreBudgetModel> tourMoreBudgetModels) {
+                if (tourMoreBudgetModels != null) {
+                    int sum = 0;
+                    for (TourMoreBudgetModel model : tourMoreBudgetModels) {
+                        int temp = model.getMore_budget_amount();
+                        sum = sum + temp;
+
+                    }
+
+                    binding.tvExtraBudget.setText(String.valueOf(sum));
+                }
+            }
+        });
+
         viewModel.getTripAllExpenses(eventModel.getTrip_id()).observe(this, new Observer<List<TourExpenseModel>>() {
             @Override
             public void onChanged(List<TourExpenseModel> expenseList) {
@@ -154,18 +163,6 @@ public class EventDetailsActivity extends AppCompatActivity implements DataPass 
     public void bind(TourEventModel eventModel) {
         binding.setEventModel(eventModel);
     }
-
-
-
-    @Override
-    public void getMoreBudgetModel(TourMoreBudgetModel model) {
-
-        Intent intent = new Intent(this, EventDetailsActivity.class);
-        intent.putExtra("model", model);
-        startActivity(intent);
-        finish();
-    }
-
 
 }
 

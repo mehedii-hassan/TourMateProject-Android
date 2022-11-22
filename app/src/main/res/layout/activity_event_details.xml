@@ -30,13 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="30dp"
             app:tint="#FFCE30" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvId"
-            android:text="dhgaskhgash"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"/>
+
 
         <TextView
             android:id="@+id/tvEDTourName"
@@ -216,6 +210,36 @@
                     app:layout_constraintStart_toEndOf="@+id/tvBudget"
                     app:layout_constraintTop_toTopOf="@id/tvBudget" />
 
+                <TextView
+                    android:id="@+id/tvExtraBudgetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="Extra Budget          "
+                    android:textColor="#ff69b4"
+                    android:textStyle="italic|bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvBudgetName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBudgetName" />
+
+                <TextView
+                    android:id="@+id/tvExtraBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:padding="2dp"
+                    android:text="0"
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineId"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBudget" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="TK"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/tvExtraBudget"
+                    app:layout_constraintTop_toTopOf="@id/tvExtraBudget" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
