@@ -18,7 +18,6 @@ public class TourExpenseModel implements Parcelable {
     private int amount;
     private String comment;
     private String date;
-    private int totalExpense;
 
     public TourExpenseModel(int tripId, int amount, String comment, String date) {
         this.tripId = tripId;
@@ -42,7 +41,6 @@ public class TourExpenseModel implements Parcelable {
         amount = in.readInt();
         comment = in.readString();
         date = in.readString();
-        totalExpense = in.readInt();
     }
 
     public static final Creator<TourExpenseModel> CREATOR = new Creator<TourExpenseModel>() {
@@ -97,26 +95,6 @@ public class TourExpenseModel implements Parcelable {
         this.date = date;
     }
 
-    public int getTotalExpense() {
-        return totalExpense;
-    }
-
-    public void setTotalExpense(int totalExpense) {
-        this.totalExpense = totalExpense;
-    }
-
-    @Override
-    public String toString() {
-        return "TourExpenseModel{" +
-                "tour_expense_id=" + tour_expense_id +
-                ", userId=" + tripId +
-                ", amount=" + amount +
-                ", comment='" + comment + '\'' +
-                ", date='" + date + '\'' +
-                ", totalExpense=" + totalExpense +
-                '}';
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -129,6 +107,5 @@ public class TourExpenseModel implements Parcelable {
         dest.writeInt(amount);
         dest.writeString(comment);
         dest.writeString(date);
-        dest.writeInt(totalExpense);
     }
 }

@@ -34,6 +34,12 @@ public class TourEventModel implements Parcelable {
     private String event_create_date;
     private long how_many_days_left;
 
+    @Ignore
+    public TourEventModel(int trip_id,String tripBudget) {
+        this.trip_id = trip_id;
+        this.userId = userId;
+        this.tripBudget = tripBudget;
+    }
 
     public TourEventModel(int userId, String tripName, String tripDescription, String tripStartLocation, String tripDestination, String tripStartDate, String tripEndDate, String tripBudget, String event_create_date, long how_many_days_left) {
         this.userId = userId;

@@ -1,12 +1,15 @@
 package com.example.tourmatenewproject.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tbl_more_budget")
-public class TourMoreBudgetModel {
+public class TourMoreBudgetModel implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int more_budget_id;
     @ColumnInfo(name = "trip_id")
@@ -30,6 +33,26 @@ public class TourMoreBudgetModel {
         this.taking_from_where = taking_from_where;
         this.date = date;
     }
+
+    protected TourMoreBudgetModel(Parcel in) {
+        more_budget_id = in.readInt();
+        tripID = in.readInt();
+        more_budget_amount = in.readInt();
+        taking_from_where = in.readString();
+        date = in.readString();
+    }
+
+    public static final Creator<TourMoreBudgetModel> CREATOR = new Creator<TourMoreBudgetModel>() {
+        @Override
+        public TourMoreBudgetModel createFromParcel(Parcel in) {
+            return new TourMoreBudgetModel(in);
+        }
+
+        @Override
+        public TourMoreBudgetModel[] newArray(int size) {
+            return new TourMoreBudgetModel[size];
+        }
+    };
 
     public int getMore_budget_id() {
         return more_budget_id;
@@ -80,5 +103,19 @@ public class TourMoreBudgetModel {
                 ", taking_from_where='" + taking_from_where + '\'' +
                 ", date='" + date + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(more_budget_id);
+        dest.writeInt(tripID);
+        dest.writeInt(more_budget_amount);
+        dest.writeString(taking_from_where);
+        dest.writeString(date);
     }
 }

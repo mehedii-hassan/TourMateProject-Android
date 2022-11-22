@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,7 +30,6 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
 
     private ActivityExpenseListBinding binding;
     private TourExpenseViewModel expenseViewModel;
-    private UserModel user;
     private TourEventModel tourEventModel;
 
     @Override
@@ -41,16 +41,10 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
         binding = ActivityExpenseListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //get user from intent--------------
         //user = getIntent().getParcelableExtra("user");
         tourEventModel = getIntent().getParcelableExtra("eventModel");
 
-        binding.fabEL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.fabEL.setOnClickListener(v -> finish());
 
         TourExpenseAdapter tourExpenseAdapter = new TourExpenseAdapter(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,6 +54,7 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
             @Override
             public void onChanged(List<TourExpenseModel> expenseList) {
                 tourExpenseAdapter.submitNewExpenseList(expenseList);
+                Log.e("TAG","expenseListSize = "+expenseList.size());
 
                 if (expenseList.size() > 0) {
                     binding.tvEmpty.setVisibility(View.GONE);
@@ -99,7 +94,7 @@ public class ExpenseListActivity extends AppCompatActivity implements ExpenseEdi
 
     @Override
     public void onEditExpense(TourExpenseModel tourExpense) {
-        TourExpenseDialogFragment dialogFragment = new TourExpenseDialogFragment(tourExpense);
+        TourExpenseDialogFragment dialogFragment = new TourExpenseDialogFragment(tourExpense,tourEventModel);
         dialogFragment.show(getSupportFragmentManager(), "ExpenseDialog");
 
     }

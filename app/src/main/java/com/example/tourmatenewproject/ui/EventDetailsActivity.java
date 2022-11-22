@@ -4,29 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.example.tourmatenewproject.adapters.ExpandableListAdapter;
+import com.example.tourmatenewproject.callback.DataPass;
 import com.example.tourmatenewproject.databinding.ActivityEventDetailsBinding;
 import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
 import com.example.tourmatenewproject.dialogfragments.TourMoreBudgetDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
+import com.example.tourmatenewproject.entities.TourMoreBudgetModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.expandable_list_view.ExpandableListDataItems;
+import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
 import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class EventDetailsActivity extends AppCompatActivity {
+public class EventDetailsActivity extends AppCompatActivity implements DataPass {
 
     private ActivityEventDetailsBinding binding;
     private TourEventModel eventModel;
@@ -35,19 +37,35 @@ public class EventDetailsActivity extends AppCompatActivity {
     private UserModel user;
     private TourExpenseViewModel viewModel;
     private List<TourExpenseModel> expenseModelList;
+    private TourEventViewModel tourEventViewModel;
+    private TourMoreBudgetModel model;
+    int amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(TourExpenseViewModel.class);
         binding = ActivityEventDetailsBinding.inflate(getLayoutInflater());
+        tourEventViewModel = new ViewModelProvider(this)
+                .get(TourEventViewModel.class);
         setContentView(binding.getRoot());
+        Log.e("TAG", "onCreate");
 
         //get user and event model from intent ------------------
         eventModel = getIntent().getParcelableExtra("eventModel");
         user = getIntent().getParcelableExtra("user");
-        Log.e("TAG", "email " + user.getUserEmail());
+        model = getIntent().getParcelableExtra("model");
+
+        //Log.e("TAG", "email " + user.getUserEmail());
+        if (model != null) {
+
+            binding.tvId.setText(String.valueOf(model.getMore_budget_amount()));
+            //Log.e("TAG", "model onCreate  " + model.getMore_budget_amount());
+        }
+
+
         bind(eventModel);
+
 
         listDataChild = ExpandableListDataItems.getData();
         listDataHeader = new ArrayList<>(listDataChild.keySet());
@@ -82,7 +100,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                 } else if (selected.equalsIgnoreCase("Add more budget")) {
 
-                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment(eventModel);
+                    TourMoreBudgetDialogFragment fragment = new TourMoreBudgetDialogFragment(user, eventModel);
                     fragment.show(getSupportFragmentManager(), "Tour More Budget");
 
                 } else if (selected.equalsIgnoreCase("View more budget list")) {
@@ -135,6 +153,17 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     public void bind(TourEventModel eventModel) {
         binding.setEventModel(eventModel);
+    }
+
+
+
+    @Override
+    public void getMoreBudgetModel(TourMoreBudgetModel model) {
+
+        Intent intent = new Intent(this, EventDetailsActivity.class);
+        intent.putExtra("model", model);
+        startActivity(intent);
+        finish();
     }
 
 

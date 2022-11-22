@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class TourEventDialogFragment extends DialogFragment {
 
@@ -63,7 +62,7 @@ public class TourEventDialogFragment extends DialogFragment {
             binding.tvTripStartDate.setText(tourEvent.getTripStartDate());
             binding.tvTripEndDate.setText(tourEvent.getTripEndDate());
             binding.etTripBudget.setText(tourEvent.getTripBudget());
-            binding.btnCreateEvent.setText("Update event");
+            binding.btnCreateEvent.setText("Update an event");
             binding.tvAddAnEvent.setText("Update an Event");
         }
         return binding.getRoot();
@@ -127,7 +126,7 @@ public class TourEventDialogFragment extends DialogFragment {
                             tripDestination, tripStartDate, tripEndDate, tripBudget, eventCreateDate, differenceInDays);
                     viewModel.addEvent(tourEventModel);
                     dismiss();
-                    Toast.makeText(getActivity(), "Successfully Inserted " + differenceInDays, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Successfully Created", Toast.LENGTH_SHORT).show();
                 }
             }
         });

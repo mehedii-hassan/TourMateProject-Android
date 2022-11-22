@@ -33,7 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:maxImageSize="30dp"
-                app:tint="#FF9800" />
+                app:tint="#FFCE30" />
 
             <TextView
                 android:id="@+id/tvNameGA"

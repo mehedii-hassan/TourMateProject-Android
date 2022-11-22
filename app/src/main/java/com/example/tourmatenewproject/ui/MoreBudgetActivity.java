@@ -96,7 +96,7 @@ public class MoreBudgetActivity extends AppCompatActivity implements MoreBudgetD
     @Override
     public void onEditMoreBudget(TourMoreBudgetModel moreBudgetModel) {
 
-        TourMoreBudgetDialogFragment dialogFragment = new TourMoreBudgetDialogFragment(moreBudgetModel);
+        TourMoreBudgetDialogFragment dialogFragment = new TourMoreBudgetDialogFragment(moreBudgetModel,eventModel);
         dialogFragment.show(getSupportFragmentManager(), "ExpenseDialog");
 
     }
