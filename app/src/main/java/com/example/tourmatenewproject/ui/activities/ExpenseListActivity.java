@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,18 +10,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.adapters.TourExpenseAdapter;
 import com.example.tourmatenewproject.callback.ExpenseDeleteListener;
 import com.example.tourmatenewproject.callback.ExpenseEditListener;
 import com.example.tourmatenewproject.databinding.ActivityExpenseListBinding;
-import com.example.tourmatenewproject.dialogfragments.TourEventDialogFragment;
-import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
+import com.example.tourmatenewproject.ui.dialogfragments.TourExpenseDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
-import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.util.List;

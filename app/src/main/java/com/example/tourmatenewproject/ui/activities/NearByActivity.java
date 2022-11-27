@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;

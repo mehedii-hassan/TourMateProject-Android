@@ -1,8 +1,7 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,11 +21,10 @@ import com.example.tourmatenewproject.callback.EventEditListener;
 import com.example.tourmatenewproject.callback.OnEventItemClickListener;
 import com.example.tourmatenewproject.databinding.ActivityMainBinding;
 import com.example.tourmatenewproject.databinding.CustomAlertDialogBinding;
-import com.example.tourmatenewproject.dialogfragments.TourEventDialogFragment;
+import com.example.tourmatenewproject.ui.dialogfragments.TourEventDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourEventViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 

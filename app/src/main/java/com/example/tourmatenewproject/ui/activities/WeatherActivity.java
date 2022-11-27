@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -65,8 +65,11 @@ public class WeatherActivity extends AppCompatActivity {
             binding.etCityName.setText("");
         });
 
-        weatherViewModel.getCurrentLiveDate().observe(this, currentResponseModel -> {
-            updateUI(currentResponseModel);
+        weatherViewModel.getCurrentLiveDate().observe(this, new Observer<CurrentResponseModel>() {
+            @Override
+            public void onChanged(CurrentResponseModel currentResponseModel) {
+                WeatherActivity.this.updateUI(currentResponseModel);
+            }
         });
 
         weatherViewModel.getForecastLiveDate().observe(this, new Observer<ForecastResponseModel>() {

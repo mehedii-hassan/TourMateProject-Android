@@ -35,4 +35,8 @@ public class UserViewModel extends AndroidViewModel {
         return userLocalRepository.getUserEmail(email);
     }
 
+    /*public LiveData<Boolean> emailExistsOnNot(String email) {
+        return userLocalRepository.emailExistsOnNot(email);
+    }*/
+
 }

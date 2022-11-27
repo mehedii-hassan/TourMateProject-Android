@@ -49,5 +49,9 @@ public class UserLocalRepository {
         return userDao.getUserEmail(email);
     }
 
+    /*public LiveData<Boolean> emailExistsOnNot(String email) {
+        return userDao.isEmailExistsOrNot(email);
+    }*/
+
 
 }

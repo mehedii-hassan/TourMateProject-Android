@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.databinding.ActivityPasswordResetBinding;
+import com.example.tourmatenewproject.db.TourEventsDatabase;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.UserViewModel;
 
@@ -19,6 +19,7 @@ public class PasswordResetActivity extends AppCompatActivity {
 
     private ActivityPasswordResetBinding binding;
     private UserViewModel userViewModel;
+    private UserModel user;
 
 
     @Override
@@ -71,11 +72,13 @@ public class PasswordResetActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter a password", Toast.LENGTH_SHORT).show();
             //binding.etEmailPassword.setError("Enter a password");
             binding.etPasswordFP.requestFocus();
+            return;
         }
         if (password.length() < 6) {
             Toast.makeText(this, "Password length should be at least 6", Toast.LENGTH_SHORT).show();
             //binding.etEmailPassword.setError("minimum length at least 6");
             binding.etPasswordFP.requestFocus();
+            return;
         }
         //checking the validity of Confirm password
         if (conPassword.isEmpty()) {
@@ -88,28 +91,45 @@ public class PasswordResetActivity extends AppCompatActivity {
             //etConfirmPassword.setError("Password not matched");
             Toast.makeText(getApplicationContext(), "Password and confirm password not matched ", Toast.LENGTH_SHORT).show();
             binding.etConfirmPassFP.requestFocus();
+            return;
         }
+        boolean isUserExist = TourEventsDatabase.getDb(this).getSignUpDao().isUserRegistered(email);
 
-        //Check user registered or not----------------
-        userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
-            @Override
-            public void onChanged(UserModel user) {
-                if (user != null) {
+        Log.e("TAG", "isUserExist " + isUserExist);
+        UserModel user = TourEventsDatabase.getDb(this).getSignUpDao().getUser(email);
+
+        //Check user exists  or not.If exists then successfully reset password otherwise doesn't exist----------------
+        if (isUserExist) {
+            if (user != null) {
+                int userId = user.getUserId();
+                String name = user.getUserName();
+                final UserModel userModel = new UserModel(userId, name, email, password, conPassword);
+                userViewModel.updateUser(userModel);
+                binding.etEmailFP.setText("");
+                binding.etPasswordFP.setText("");
+                binding.etConfirmPassFP.setText("");
+                Toast.makeText(PasswordResetActivity.this, "Successfully Password Reset ", Toast.LENGTH_SHORT).show();
+
+            }
+
+            /*userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
+                @Override
+                public void onChanged(UserModel user) {
+                    //PasswordResetActivity.this.user = user;
                     int userId = user.getUserId();
                     String name = user.getUserName();
                     final UserModel userModel = new UserModel(userId, name, email, password, conPassword);
                     userViewModel.updateUser(userModel);
-                    /*binding.etEmailFP.setText("");
+                    binding.etEmailFP.setText("");
                     binding.etPasswordFP.setText("");
-                    binding.etConfirmPassFP.setText("");*/
+                    binding.etConfirmPassFP.setText("");
                     Toast.makeText(PasswordResetActivity.this, "Successfully Password Reset ", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PasswordResetActivity.this, "Email is not Registered", Toast.LENGTH_LONG).show();
+
                 }
+            });*/
 
-            }
-        });
-
-
+        } else {
+            Toast.makeText(PasswordResetActivity.this, "User is not Registered", Toast.LENGTH_LONG).show();
+        }
     }
 }

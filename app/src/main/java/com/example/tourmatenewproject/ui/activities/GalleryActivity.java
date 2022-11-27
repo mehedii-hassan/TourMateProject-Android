@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.tourmatenewproject.adapters.TourGalleryAdapter;
 import com.example.tourmatenewproject.callback.OnGalleryImageItemClickListener;

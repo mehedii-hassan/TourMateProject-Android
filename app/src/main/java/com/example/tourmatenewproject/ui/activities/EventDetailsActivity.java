@@ -1,10 +1,9 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +11,9 @@ import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.example.tourmatenewproject.adapters.ExpandableListAdapter;
-import com.example.tourmatenewproject.callback.DataPass;
 import com.example.tourmatenewproject.databinding.ActivityEventDetailsBinding;
-import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
-import com.example.tourmatenewproject.dialogfragments.TourMoreBudgetDialogFragment;
+import com.example.tourmatenewproject.ui.dialogfragments.TourExpenseDialogFragment;
+import com.example.tourmatenewproject.ui.dialogfragments.TourMoreBudgetDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
 import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.TourMoreBudgetModel;

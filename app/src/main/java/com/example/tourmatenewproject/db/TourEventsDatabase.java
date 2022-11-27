@@ -34,7 +34,7 @@ public abstract class TourEventsDatabase extends RoomDatabase {
     public static TourEventsDatabase getDb(Context context) {
         if (db == null) {
             db = Room.databaseBuilder(context.getApplicationContext(), TourEventsDatabase.class, "TourEventsDb")
-                    .build();
+                    .allowMainThreadQueries().build();
         }
         return db;
     }

@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.tourmatenewproject.R;
 import com.example.tourmatenewproject.databinding.ActivitySignUpBinding;
+import com.example.tourmatenewproject.db.TourEventsDatabase;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.UserViewModel;
 
@@ -25,7 +25,7 @@ public class UserSignUpActivity extends AppCompatActivity {
     private androidx.appcompat.app.AlertDialog alertDialog;
     private ActivitySignUpBinding binding;
     private UserViewModel userViewModel;
-    private UserModel userModel;
+    private UserModel user;
 
 
     @Override
@@ -80,6 +80,7 @@ public class UserSignUpActivity extends AppCompatActivity {
         if (userName.isEmpty()) {
             Toast.makeText(this, "Please enter your Name", Toast.LENGTH_SHORT).show();
             binding.etUserName.requestFocus();
+            return;
         }
         //checking the validity of the email
         if (email.isEmpty()) {
@@ -101,35 +102,49 @@ public class UserSignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter a password", Toast.LENGTH_SHORT).show();
             //binding.etEmailPassword.setError("Enter a password");
             binding.etEmailPassword.requestFocus();
+            return;
         }
         if (password.length() < 6) {
             Toast.makeText(this, "Password length should be at least 6", Toast.LENGTH_SHORT).show();
             //binding.etEmailPassword.setError("minimum length at least 6");
             binding.etEmailPassword.requestFocus();
+            return;
         }
         //checking the validity of Confirm password
         if (passConfirm.isEmpty()) {
             //etConfirmPassword.setError("Enter confirm password");
             Toast.makeText(getApplicationContext(), "Enter confirm password ", Toast.LENGTH_SHORT).show();
             binding.etEmailConfirmPass.requestFocus();
-        } else if (!passConfirm.equalsIgnoreCase(password)) {
+            return;
+        }
+        if (!passConfirm.equalsIgnoreCase(password)) {
             //etConfirmPassword.setError("Password not matched");
             Toast.makeText(getApplicationContext(), "Password not matched ", Toast.LENGTH_SHORT).show();
             binding.etEmailConfirmPass.requestFocus();
-
+            return;
         }
 
+        boolean isUserExist = TourEventsDatabase.getDb(this).getSignUpDao().isUserExists(email, password);
 
-        //Check user registered or not----------------
-        userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
-            @Override
-            public void onChanged(UserModel user) {
-                if (user != null) {
-                    userModel = user;
-                    Toast.makeText(UserSignUpActivity.this, "Already registered try another email", Toast.LENGTH_LONG).show();
-                    Log.e("TAG", user.getUserEmail());
-                } else {
+        //Check already registered or  not . If not then will be registered-----------
+        if (isUserExist) {
+            Toast.makeText(UserSignUpActivity.this, "User is already registered try another", Toast.LENGTH_LONG).show();
+        } else {
+                final UserModel newUser = new UserModel(userName, email, password, passConfirm);
+                userViewModel.insertUser(newUser);
+                binding.etUserName.setText("");
+                binding.etEmailAddress.setText("");
+                binding.etEmailPassword.setText("");
+                binding.etEmailConfirmPass.setText("");
+                Toast.makeText(UserSignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+            }
 
+
+
+            /*userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
+                @Override
+                public void onChanged(UserModel user) {
+                    // UserSignUpActivity.this.user = user;
                     final UserModel newUser = new UserModel(userName, email, password, passConfirm);
                     userViewModel.insertUser(newUser);
                     binding.etUserName.setText("");
@@ -138,11 +153,9 @@ public class UserSignUpActivity extends AppCompatActivity {
                     binding.etEmailConfirmPass.setText("");
                     Toast.makeText(UserSignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                 }
+            });*/
 
-            }
-        });
-
-
+        }
 
 
 
@@ -166,4 +179,3 @@ public class UserSignUpActivity extends AppCompatActivity {
             }
         });*/
     }
-}

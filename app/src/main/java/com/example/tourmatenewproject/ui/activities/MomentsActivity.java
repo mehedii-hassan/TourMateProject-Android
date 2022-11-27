@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.tourmatenewproject.R;
-import com.example.tourmatenewproject.adapters.TourExpenseAdapter;
 import com.example.tourmatenewproject.adapters.TourImageAdapter;
 import com.example.tourmatenewproject.callback.MomentsDeleteListener;
 import com.example.tourmatenewproject.callback.MomentsEditListener;
 import com.example.tourmatenewproject.databinding.ActivityMomentsBinding;
 import com.example.tourmatenewproject.entities.TourEventModel;
-import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.TourImageModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourImageViewModel;

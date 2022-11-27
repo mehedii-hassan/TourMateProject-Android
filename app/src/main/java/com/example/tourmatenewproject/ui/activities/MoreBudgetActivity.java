@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.ui;
+package com.example.tourmatenewproject.ui.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +15,8 @@ import com.example.tourmatenewproject.adapters.TourMoreBudgetAdapter;
 import com.example.tourmatenewproject.callback.MoreBudgetDeleteListener;
 import com.example.tourmatenewproject.callback.MoreBudgetEditListener;
 import com.example.tourmatenewproject.databinding.ActivityMoreBudgetBinding;
-import com.example.tourmatenewproject.dialogfragments.TourExpenseDialogFragment;
-import com.example.tourmatenewproject.dialogfragments.TourMoreBudgetDialogFragment;
+import com.example.tourmatenewproject.ui.dialogfragments.TourMoreBudgetDialogFragment;
 import com.example.tourmatenewproject.entities.TourEventModel;
-import com.example.tourmatenewproject.entities.TourExpenseModel;
 import com.example.tourmatenewproject.entities.TourMoreBudgetModel;
 import com.example.tourmatenewproject.entities.UserModel;
 import com.example.tourmatenewproject.viewmodels.TourMoreBudgetViewModel;

@@ -1,4 +1,4 @@
-package com.example.tourmatenewproject.dialogfragments;
+package com.example.tourmatenewproject.ui.dialogfragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
