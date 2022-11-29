@@ -29,10 +29,10 @@
                 android:id="@+id/miAbout"
                 android:icon="@drawable/ic_baseline_info_24"
                 android:title="About" />
-            <item
+            <!--<item
                 android:id="@+id/miContact"
                 android:icon="@drawable/ic_person"
-                android:title="Tour Contacts" />
+                android:title="Tour Contacts" />-->
             <item
                 android:id="@+id/miSignOut"
                 android:icon="@drawable/ic_baseline_exit_to_app_24"

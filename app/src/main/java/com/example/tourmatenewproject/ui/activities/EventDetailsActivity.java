@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +40,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     private List<TourExpenseModel> expenseModelList;
     private TourEventViewModel tourEventViewModel;
     private TourMoreBudgetViewModel moreBudgetViewModel;
+    private int totalSumOfExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        Log.e("TAG", "totalSum= " + totalSumOfExpense);
 
         binding.expandableLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -127,11 +133,13 @@ public class EventDetailsActivity extends AppCompatActivity {
                         sum = sum + temp;
 
                     }
-
+                    EventDetailsActivity.this.totalSumOfExpense = sum;
                     binding.tvExtraBudget.setText(String.valueOf(sum));
                 }
             }
         });
+
+
 
         viewModel.getTripAllExpenses(eventModel.getTrip_id()).observe(this, new Observer<List<TourExpenseModel>>() {
             @Override
@@ -147,15 +155,20 @@ public class EventDetailsActivity extends AppCompatActivity {
                     int tripBudget = Integer.parseInt(eventModel.getTripBudget());
                     int calculatePercent = (totalExpenseSum * 100) / tripBudget;
                     binding.tvPercent.setText(String.valueOf(calculatePercent));
-                   /* if (calculatePercent > 79) {
-                        binding.progressBarId.setProgressTintList(ColorStateList.valueOf(Color.RED));
-                    }*/
+                    if (calculatePercent > 79) {
+                        EventDetailsActivity.this.binding.progressBarId.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                    }else{
+                        EventDetailsActivity.this.binding.progressBarId.setProgressTintList(ColorStateList.valueOf(Color.MAGENTA
+                        ));
+
+                    }
                     binding.progressBarId.setProgress(calculatePercent);
                     Log.e("TAG", "totalsum: " + calculatePercent);
 
                 }
             }
         });
+
     }
 
     public void bind(TourEventModel eventModel) {

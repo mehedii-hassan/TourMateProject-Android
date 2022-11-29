@@ -100,9 +100,6 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
                 case R.id.miAbout:
                     Toast.makeText(this, "Future Planning", Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.miContact:
-                    Toast.makeText(this, "Future Planning ", Toast.LENGTH_SHORT).show();
-                    break;
                 case R.id.miSignOut:
                     startActivity(new Intent(this, LoginActivity.class));
                     Toast.makeText(this, "Successfully logged out", Toast.LENGTH_SHORT).show();

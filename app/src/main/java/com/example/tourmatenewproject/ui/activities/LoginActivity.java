@@ -86,33 +86,19 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        boolean isUserExist = TourEventsDatabase.getDb(this).getSignUpDao().isUserExists(email, password);
-        UserModel model = TourEventsDatabase.getDb(this).getSignUpDao().getUser(email);
-        if (model != null) {
-
-            Log.e("TAG", "model = " + model.getUserEmail());
-        }
-        /*viewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
-            @Override
-            public void onChanged(UserModel user) {
-                if (user != null) {
-                    LoginActivity.this.user = user;
-                    if (!user.getUserPassword().equals(password)) {
-                        Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            }
-        });*/
+        boolean isUserExist = TourEventsDatabase.getDb(this).getSignUpDao().isUserRegistered(email);
 
         //Check user exists or not. If exists then login successfully otherwise doesn't exist-----------------
         if (isUserExist) {
 
-            Log.e("TAG","Login Successfully");
             viewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
                 @Override
                 public void onChanged(UserModel user) {
-                    if (user != null) {
+
+                    if (!user.getUserPassword().equals(password)) {
+                        Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
+
+                    } else {
                         LoginActivity.this.user = user;
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("user", user);

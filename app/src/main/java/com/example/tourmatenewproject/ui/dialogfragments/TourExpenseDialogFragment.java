@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourmatenewproject.databinding.FragmentAddExpenseDialogBinding;
@@ -22,6 +23,7 @@ import com.example.tourmatenewproject.viewmodels.TourExpenseViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class TourExpenseDialogFragment extends DialogFragment {
@@ -82,8 +84,55 @@ public class TourExpenseDialogFragment extends DialogFragment {
             SimpleDateFormat df = new SimpleDateFormat("MMM d, yyyy hh.mm aa");
             String newDate = df.format(d);
 
-            //Checking validation-------------------
+
             if (expenseAmount.isEmpty() || expenseComment.isEmpty()) {
+                Toast.makeText(getActivity(), "Please fill up all the field properly!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (expenseId > 0) {
+                //update expense-------------
+                final int amount = Integer.parseInt(expenseAmount);
+                final TourExpenseModel expense = new TourExpenseModel(expenseId, eventModel.getTrip_id(), amount, expenseComment, newDate);
+                expenseViewModel.updateExpense(expense);
+                //Log.e("TAG", "eventID : " + eventID);
+
+                dismiss();
+                Toast.makeText(view1.getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
+            }
+            expenseViewModel.getTripAllExpenses(eventModel.getTrip_id()).observe(this, new Observer<List<TourExpenseModel>>() {
+                @Override
+                public void onChanged(List<TourExpenseModel> expenseList) {
+
+                    int totalExpenseSum = 0;
+                    int tripBudget = Integer.parseInt(eventModel.getTripBudget());
+
+                    if (expenseList != null) {
+                        for (TourExpenseModel model : expenseList) {
+                            int temp = model.getAmount();
+                            totalExpenseSum = totalExpenseSum + temp;
+                        }
+                    }
+
+                    int remainingBudget = tripBudget - totalExpenseSum;
+                    int temp = totalExpenseSum + Integer.parseInt(expenseAmount);
+                    if (temp <= tripBudget) {
+
+                        //insert new expense-----------
+                        final int amount = Integer.parseInt(expenseAmount);
+                        final TourExpenseModel expense = new TourExpenseModel(eventModel.getTrip_id(), amount, expenseComment, newDate);
+                        expenseViewModel.addExpense(expense);
+                        dismiss();
+                        Toast.makeText(view1.getContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        dismiss();
+                        Toast.makeText(view1.getContext(), "Sorry,Your have left " + remainingBudget + " TK", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+            //Checking validation-------------------
+           /* if (expenseAmount.isEmpty() || expenseComment.isEmpty()) {
                 Toast.makeText(getActivity(), "Please fill up all the field properly!", Toast.LENGTH_SHORT).show();
             } else {
 
@@ -104,7 +153,7 @@ public class TourExpenseDialogFragment extends DialogFragment {
                     dismiss();
                     Toast.makeText(view1.getContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();
                 }
-            }
+            }*/
 
         });
         binding.btnCancel.setOnClickListener(view12 -> dismiss());
