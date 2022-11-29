@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.tourmatenewproject.adapters.ForecastWeatherAdapter;
 import com.example.tourmatenewproject.databinding.ActivityWeatherBinding;
@@ -63,6 +64,13 @@ public class WeatherActivity extends AppCompatActivity {
             weatherViewModel.setCityName(cityName);
             weatherViewModel.loadDataWithCityName();
             binding.etCityName.setText("");
+        });
+
+        binding.fabWeatherActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
 
         weatherViewModel.getCurrentLiveDate().observe(this, new Observer<CurrentResponseModel>() {

@@ -10,12 +10,27 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWeatherActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            android:layout_margin="1dp"
+            app:fabSize="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="30dp"
+            app:tint="#FFCE30" />
         <EditText
             android:id="@+id/etCityName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
             android:layout_marginEnd="5dp"
             android:background="@drawable/custom_edittext_design_wa"
             android:hint="Enter a Valid City "
@@ -25,7 +40,7 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toStartOf="@+id/btnSearchCity"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/fabWeatherActivity" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSearchCity"
