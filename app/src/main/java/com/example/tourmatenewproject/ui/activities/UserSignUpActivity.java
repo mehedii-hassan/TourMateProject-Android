@@ -130,14 +130,12 @@ public class UserSignUpActivity extends AppCompatActivity {
         if (isUserExist) {
             Toast.makeText(UserSignUpActivity.this, "User is already registered try another", Toast.LENGTH_LONG).show();
         } else {
-                final UserModel newUser = new UserModel(userName, email, password, passConfirm);
-                userViewModel.insertUser(newUser);
-                binding.etUserName.setText("");
-                binding.etEmailAddress.setText("");
-                binding.etEmailPassword.setText("");
-                binding.etEmailConfirmPass.setText("");
-                Toast.makeText(UserSignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
-            }
+            final UserModel newUser = new UserModel(userName, email, password, passConfirm);
+            userViewModel.insertUser(newUser);
+            Toast.makeText(UserSignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(UserSignUpActivity.this, LoginActivity.class));
+            finish();
+        }
 
 
 
@@ -155,7 +153,7 @@ public class UserSignUpActivity extends AppCompatActivity {
                 }
             });*/
 
-        }
+    }
 
 
 
@@ -178,4 +176,4 @@ public class UserSignUpActivity extends AppCompatActivity {
                 }
             }
         });*/
-    }
+}

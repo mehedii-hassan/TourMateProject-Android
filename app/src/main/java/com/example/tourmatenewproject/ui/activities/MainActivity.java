@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements EventDeleteListen
         //this.tourEvents = tourEvent;
         TourEventDialogFragment dialogFragment = new TourEventDialogFragment(tourEvent);
         dialogFragment.show(getSupportFragmentManager(), "EventDialog");
+
+
     }
 
     @Override

@@ -105,11 +105,9 @@ public class PasswordResetActivity extends AppCompatActivity {
                 String name = user.getUserName();
                 final UserModel userModel = new UserModel(userId, name, email, password, conPassword);
                 userViewModel.updateUser(userModel);
-                binding.etEmailFP.setText("");
-                binding.etPasswordFP.setText("");
-                binding.etConfirmPassFP.setText("");
                 Toast.makeText(PasswordResetActivity.this, "Successfully Password Reset ", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(PasswordResetActivity.this, LoginActivity.class));
+                finish();
             }
 
             /*userViewModel.getUserEmail(email).observe(this, new Observer<UserModel>() {
