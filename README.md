@@ -1,10 +1,11 @@
-
 # Tourmate project(Android)
+
+## Overview
+TourMate is a user-friendly travel app for storing photos and videos, exploring local attractions, and checking weather updates at destinations.
 
 ## Frontend
 
 - XML (Extensible Markup Language)
-
 
 ## Backend
 
