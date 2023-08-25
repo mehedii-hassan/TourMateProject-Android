@@ -1,7 +1,7 @@
 # Tourmate project
 
 ## Overview
-TourMate is a user-friendly travel app for storing photos and videos, exploring local attractions, and checking weather updates at destinations.
+TourMate is a user-friendly travel app where they store their Tour photos, videos, and expenses and also check weather updates and search nearby places at destinations.
 
 ## Frontend
 
